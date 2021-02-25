@@ -1,0 +1,71 @@
+ion-content{
+    position: absolute;
+    --background: #ffffff;
+
+    .label-modal{
+        color: #515252;
+        padding-left: 10%;
+        padding-right: 10%;
+        font-family: 'Roboto';
+        font-style: normal;
+        font-weight: 500;
+        font-size: 18px;
+        line-height: 21px;
+    }
+
+    .label-modal2{
+        color: #515252;
+        padding-left: 12%;
+        padding-right: 12%;
+        font-family: 'Roboto';
+        font-style: normal;
+        font-weight: normal;
+        font-size: 16px;
+        line-height: 19px;
+
+    }
+
+
+    .button-modal-password{
+        --background: #708070;
+        --color-activated: #ffffff;
+        --background-activated: #708070;
+        text-transform: none;
+        --box-shadow: none;
+        width: 86%;
+        --border-radius: 25px;
+        height: 50px;
+    }
+
+    .button-modal-try{
+        --background: #ffffff;
+        --color-activated: #ffffff;
+        --background-activated: #708070;
+        text-transform: none;
+        --box-shadow: none;
+        width: 86%;
+        --border-radius: 25px;
+        border-radius: 25px;
+        border: 1.5px solid #708070;
+        height: 50px;
+    }
+
+    .label-button-password{
+        color: white;
+        font-family: 'Roboto';
+        font-style: normal;
+        font-weight: 500;
+        font-size: 20px;
+        line-height: 23px;
+    }
+
+    .label-button-try{
+        color: #708070;
+        font-family: 'Roboto';
+        font-style: normal;
+        font-weight: 500;
+        font-size: 20px;
+        line-height: 23px;
+    }
+
+}

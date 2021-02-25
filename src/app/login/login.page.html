@@ -1,0 +1,89 @@
+
+
+<ion-content no-bounce [fullscreen]="true">
+    <ion-row>
+        <img src ="../assets/login/logo.png" class="img-login"  />
+    </ion-row>
+    <ion-row>
+        <div style="text-align: center; width: 100%; margin-bottom: 5%;">
+            <ion-label class="label-login">
+                ¿No tienes cuenta?
+            </ion-label>
+            <ion-label class="label-login-registrate" (click) = "irRegistrar()">
+                <b>
+                    Registrate
+                </b>
+            </ion-label>
+        </div>
+
+    </ion-row>
+    <form [formGroup]="myForm" (ngSubmit)="onSubmit()" novalidate>
+        <ion-row>
+            <ion-label class="label-input">Correo electrónico</ion-label>
+        </ion-row>
+        <ion-row>
+            <div style="width: 100%; text-align: center; align-content: center;">
+                <ion-item class="input-login" lines="none">
+                    <ion-input formControlName="email" type="text" class="input-text" placeholder="Ej: correo@gmail.com"></ion-input>
+                  </ion-item>
+            </div>
+            <div style="width: 100%; margin-bottom: 5px;">
+                <span class="error ion-padding error-input" *ngIf="submitted && errorControl.email.errors?.required">
+                    <ion-label class="label-error">Email es requerido.</ion-label>
+                  </span>
+                  <span class="error ion-padding error-input" *ngIf="submitted && errorControl.email.errors?.pattern">
+                    <ion-label class="label-error">Ingrese un email válido.</ion-label>
+                  </span>
+            </div>
+    
+        </ion-row>
+        <ion-row>
+            <ion-label class="label-input">Contraseña</ion-label>
+        </ion-row>
+        <ion-row>
+            <div style="width: 100%; text-align: center;">
+                <ion-item class="input-login" lines="none">    
+                    <ion-input formControlName="password" type="password" class="input-text" placeholder="Ingresar contraseña"></ion-input>
+                  </ion-item>
+            </div>
+            <div style="width: 100%; margin-bottom: 5px;">
+                <span class="error ion-padding error-input" *ngIf="submitted && errorControl.password.errors?.required">
+                    <ion-label class="label-error">Contraseña es requerida.</ion-label>
+                  </span>
+                  <span class="error ion-padding error-input" *ngIf="submitted && errorControl.password.errors?.minlength">
+                    <ion-label class="label-error">Minimo 8 caracteres.</ion-label>
+                  </span>
+            </div>
+        </ion-row>
+        <ion-row>
+                <ion-item class="item-login" lines="none" style="margin-left: 4%;" >
+                    <ion-checkbox class="checkbox-item" slot="start"></ion-checkbox>
+                    <ion-label class="item-label">Recordar</ion-label>
+                </ion-item>
+                <ion-item class="item-login" lines="none" style="margin:auto" >
+                    <ion-label class="item-label2" (click) = "irOlvidoContrasenia()">
+                        Olvide mi contraseña
+                    </ion-label>
+                </ion-item>
+         
+        </ion-row>
+        <ion-row>
+            <div style="width: 100%; align-content: center; text-align: center;">
+                <ion-button class="button-sesion" type="submit">
+                    <ion-label class="label-button-sesion">Inicia sesión</ion-label>
+                </ion-button>
+            </div>
+        </ion-row>
+    </form>
+
+
+    <ion-row>
+        <div style="width: 100%; align-content: center; text-align: center;">
+            <ion-button class="button-facebook" (click) = "irValidarDatosFacebooK()">
+                <ion-icon slot="start" name="logo-facebook" style="zoom: 1.5;" ></ion-icon>
+                <ion-label class="label-button-facebook">Ingresar con facebook</ion-label>
+            </ion-button>
+        </div>
+    </ion-row>
+
+</ion-content>

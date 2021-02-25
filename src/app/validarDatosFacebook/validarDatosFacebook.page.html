@@ -1,0 +1,103 @@
+<ion-content no-bounce [fullscreen]="true">
+    <ion-row>
+        <img src ="../assets/login/logo.png" class="img-login"  />
+    </ion-row>
+
+    <ion-row>
+        <div style="text-align: center; width: 100%; margin-bottom: 5%;">
+            <ion-label class="label-page">
+                Por favor, actualiza y agrega tus datos
+            </ion-label>
+        </div>
+    </ion-row>
+    <form [formGroup]="myForm" (ngSubmit)="onSubmit()" novalidate>
+        <ion-row>
+            <ion-label class="label-input">Celular</ion-label>
+        </ion-row>
+        <ion-row>
+            <div style="width: 100%; text-align: center;">
+                <ion-item class="input-login" lines="none">    
+                    <ion-input formControlName="celular" type="text" class="input-text" placeholder="Ingresar celular"></ion-input>
+                  </ion-item>
+            </div>
+            <div style="width: 100%; margin-bottom: 5px;">
+                <span class="error ion-padding error-input" *ngIf="submitted && errorControl.celular.errors?.required">
+                    <ion-label class="label-error">Celular requerido.</ion-label>
+                  </span>
+                  <span class="error ion-padding error-input" *ngIf="submitted && errorControl.celular.errors?.pattern">
+                    <ion-label class="label-error">Solo numeros</ion-label>
+                  </span>
+                  <span class="error ion-padding error-input" *ngIf="submitted && errorControl.celular.errors?.minLength">
+                    <ion-label class="label-error">Minimo 9 caracteres.</ion-label>
+                  </span>
+            </div>
+        </ion-row>
+        <ion-row>
+            <ion-label class="label-input">Correo electrónico</ion-label>
+        </ion-row>
+        <ion-row>
+            <div style="width: 100%; text-align: center; align-content: center;">
+                <ion-item class="input-login" lines="none">
+                    <ion-input formControlName="email" type="text" class="input-text" placeholder="Ej: correo@gmail.com"></ion-input>
+                  </ion-item>
+            </div>
+            <div style="width: 100%; margin-bottom: 5px;">
+                <span class="error ion-padding error-input" *ngIf="submitted && errorControl.email.errors?.required">
+                    <ion-label class="label-error">Email es requerido.</ion-label>
+                  </span>
+                  <span class="error ion-padding error-input" *ngIf="submitted && errorControl.email.errors?.pattern">
+                    <ion-label class="label-error">Ingrese un email válido.</ion-label>
+                  </span>
+            </div>
+    
+        </ion-row>
+
+        <ion-row>
+            <ion-label class="label-input">DNI o Carnet de extranjería</ion-label>
+        </ion-row>
+        <ion-row>
+            <div style="width: 100%; text-align: center;">
+                <ion-item class="input-login" lines="none">    
+                    <ion-input formControlName="dni" type="number" class="input-text" placeholder="Ingresar DNI"></ion-input>
+                  </ion-item>
+            </div>
+            <div style="width: 100%; margin-bottom: 5px;">
+                <span class="error ion-padding error-input" *ngIf="submitted && errorControl.dni.errors?.required">
+                    <ion-label class="label-error">DNI es requerido.</ion-label>
+                  </span>
+                  <span class="error ion-padding error-input" *ngIf="submitted && errorControl.dni.errors?.minLength">
+                    <ion-label class="label-error">Minimo 8 caracteres.</ion-label>
+                  </span>
+                  <span class="error ion-padding error-input" *ngIf="submitted && errorControl.dni.errors?.maxLength">
+                    <ion-label class="label-error">Minimo caracteres.</ion-label>
+                  </span>
+
+            </div>
+        </ion-row>
+        <ion-row >
+            <div style="width: 100%; text-align: center;">
+              <ion-label class="label-terminos">Al registrarse acepta los </ion-label>
+              <ion-label class="label-terminos1">términos y condiciones </ion-label>
+              <ion-label class="label-terminos2">de Evelyn Spa Perú.</ion-label>
+            </div>
+        </ion-row>
+
+        <ion-row>
+            <div style="width: 100%;">
+              <ion-item class="item-check" lines="none" >
+                <ion-checkbox formControlName="checkbox" class="checkbox-item" slot="start"></ion-checkbox>
+                <p class="item-label">Acepto recibir beneficios, ofertas, publicidad y novedades de Evelyn Spa Perú.</p>
+            </ion-item>
+            </div>
+        </ion-row>
+
+        <ion-row>
+            <div style="width: 100%; align-content: center; text-align: center;">
+                <ion-button class="button-sesion" type="submit">
+                    <ion-label class="label-button-sesion">Guardar</ion-label>
+                </ion-button>
+            </div>
+        </ion-row>
+    </form>
+
+</ion-content>

@@ -1,0 +1,35 @@
+
+
+    ion-tab-bar{
+        --background: white;
+        border-top: none !important;
+
+        ion-tab-button {
+            --color: var(--ion-color-medium-shade);
+            --color-selected: var(--page-color-selected);
+            --background-focused: #A8B898;
+            --color-selected: #A8B898;
+            .label-tab{
+                color: #708070;
+            }
+             .icon-tab{
+                 zoom: 1;
+             }            
+
+          }
+
+          ion-tab-button:active{
+            .label-tab{
+                color: #708070 !important;
+            }
+            
+
+            .icon-tab{
+                zoom: 1.3;
+            } 
+        }
+      }
+
+
+
+

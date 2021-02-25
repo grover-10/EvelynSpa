@@ -1,0 +1,53 @@
+<ion-header [translucent]="true" class="ion-no-border">
+  <ion-toolbar>
+    <ion-title class="title-page">
+      Mi cuenta
+    </ion-title>
+  </ion-toolbar>
+</ion-header>
+  
+  <ion-content [fullscreen]="true">
+
+    <ion-row style="margin-top: 20%;">
+      <div style="width: 100%;">
+        <ion-card class="card-perfil">
+          <ion-item class="item-perfil" lines = "none">
+            <ion-avatar class="img-perfil" slot="start">
+              <img  src="../../assets/cuenta/avatar.png">
+            </ion-avatar>
+            <ion-label>
+              <h3 class="label-saludo">Hola</h3>
+              <p class="label-nombre"><b>Laura Lopez</b></p>
+            </ion-label>
+
+          </ion-item>
+        </ion-card>
+      </div>
+
+    </ion-row>
+
+
+    <ion-card class="card-items-perfil">
+      <ion-item class="item-menu" lines = "none">
+        <ion-icon src= "../../assets/cuenta/star_border_24px.svg" slot="start"></ion-icon>
+        <ion-label class="label-menu">Mi puntaje</ion-label>
+        <ion-icon style="color: #708070;" name="chevron-forward-outline" slot="end"></ion-icon>
+      </ion-item>
+    
+      <ion-item class="item-menu" lines = "none">
+        <ion-icon src= "../../assets/cuenta/Profile.svg" slot="start"></ion-icon>
+        <ion-label class="label-menu">Mis datos</ion-label>
+        <ion-icon style="color: #708070;" name="chevron-forward-outline" slot="end"></ion-icon>
+      </ion-item>
+    
+      <ion-item class="item-menu" lines = "none">
+        <ion-icon src= "../../assets/cuenta/Login.svg" slot="start"></ion-icon>
+        <ion-label class="label-menu">Cerrar Sesión</ion-label>
+        <ion-icon style="color: #708070;" name="chevron-forward-outline" slot="end"></ion-icon>
+      </ion-item>
+
+      
+    
+    </ion-card>
+  </ion-content>
+  

@@ -1,0 +1,197 @@
+ion-content {
+    // To get the ion-content behind the ion-header
+    position: absolute;
+    top: 0;
+    --background: #ffffff;
+
+    .img-login{
+        margin: auto;
+        margin-top: 10%;
+        max-width: 220px;
+        max-height: 220px;
+    }
+
+    .label-page{
+        color: #515252;
+        font-family: 'Roboto';
+        font-style: Medium;
+        font-weight: normal;
+        font-size: 16px;
+        line-height: 19px;
+       
+    }
+
+    
+    .label-input{
+        color: #515252;
+        margin-left: 7%;
+
+        font-family: 'Roboto';
+        font-style: Regular;
+        font-weight: 400;
+        font-size: 16px;
+        line-height: 19px;
+       
+    }
+
+    .input-login{
+        margin-top: 10px;
+        margin-bottom: 5px;
+        margin-left: auto;
+        margin-right: auto;
+        width: 86%;
+        height: 50px;
+       --background: transparent !important;
+       border: 1px solid #BDBDBD;
+       box-sizing: border-box;
+       border-radius: 8px !important;
+     
+       --highlight-color-focused: none;
+
+
+       .input-text{
+           color: #8F9090;
+           font-family: 'Roboto';
+           font-style: Regular;
+           font-weight: 400;
+       }
+    }
+
+    .error-input{
+        margin-left: 5%;
+
+
+        .label-error{
+
+            font-family: 'Roboto';
+            font-style: Regular;
+            font-weight: 400;
+            font-size: 14px;
+            line-height: 19px;
+            color: red;
+        }
+   
+
+    }
+
+    .item-login{
+        width: 45%;
+        --background: transparent !important;
+
+        ion-checkbox{
+            --checkmark-color: #A8B898;
+            --background-checked: white;
+            --background: white;
+            --border-color:#708070;
+            --border-color-checked: #A8B898;
+            --border-radius:  4px;
+        }
+
+
+        .item-label{
+            color: #515252;
+            font-family: 'Roboto';
+            font-style: normal;
+            font-weight: normal;
+            font-size: 14px;
+            line-height: 16px;
+
+        }
+
+        .item-label2{
+            color: #708070;
+            font-family: 'Roboto';
+            font-style: normal;
+            font-weight: normal;
+            font-size: 14px;
+            line-height: 16px;
+            text-align: center;
+            text-decoration-line: underline;
+
+        }
+
+
+    }
+
+    .button-sesion{
+        --background: #E0E0E0;
+        --color-activated: #ffffff;
+        --background-activated: #708070;
+        text-transform: none;
+        --box-shadow: none;
+        width: 86%;
+        --border-radius: 25px;
+        height: 50px;
+        
+        .label-button-sesion{
+            color: #8F9090;
+            font-family: Roboto;
+            font-style: normal;
+            font-weight: 500;
+            font-size: 20px;
+            line-height: 23px;
+        }
+    }
+
+    .label-terminos{
+        color: #515252;
+        font-family: 'Roboto';
+        font-style: Regular;
+        font-weight: 400;
+        font-size: 11px;
+        line-height: 19px;
+        margin-top: 10px;
+    }
+    .label-terminos1{
+        color: #515252;
+        font-family: 'Roboto';
+        font-style: Regular;
+        font-weight: 400;
+        font-size: 11px;
+        text-decoration: underline;
+        line-height: 19px;
+        margin-top: 10px;
+    }
+    .label-terminos2{
+        color: #515252;
+        font-family: 'Roboto';
+        font-style: Regular;
+        font-weight: 400;
+        font-size: 11px;
+        line-height: 19px;
+        margin-top: 10px;
+    }
+
+    .item-check{
+      
+        --background: transparent !important;
+        width: 90%;
+        margin-left: auto;
+        
+        margin-right: auto;
+
+        ion-checkbox{
+            --checkmark-color: #A8B898;
+            --background-checked: white;
+            --background: white;
+            --border-color:#708070;
+            --border-color-checked: #A8B898;
+            --border-radius:  4px;
+        }
+
+        
+        .item-label{
+            color: #515252;
+            font-family: 'Roboto';
+            font-style: normal;
+            font-weight: normal;
+            font-size: 10px;
+            line-height: 12px;
+
+        }
+
+    }
+
+
+
+}

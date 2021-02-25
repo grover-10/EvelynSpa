@@ -1,0 +1,54 @@
+<ion-header no-shadow no-border class="ion-no-border">
+    <ion-toolbar>
+      <ion-buttons slot="start">
+        <ion-back-button style="content: url('../assets/icon/Arrow - Left 2.svg'); zoom: 0.8;"></ion-back-button>
+      </ion-buttons>
+    </ion-toolbar>
+  </ion-header>
+
+
+<ion-content no-bounce [fullscreen]="true">
+ 
+    <ion-row>
+          <div style="width: 100%; text-align: center; padding-top: 25%;">
+              <ion-label >
+                  <h2 class="label-page"><b>Olvidé mi contraseña</b></h2>
+              </ion-label>
+          </div>
+    </ion-row>
+
+    <ion-row>
+        <div style="width: 100%; text-align: center; padding-top: 3%;">
+            <ion-label >
+                <h3 class="label-page2">Ingresa tu correo y te enviaremos la información para cambiar tu contraseña</h3>
+            </ion-label>
+        </div>
+  </ion-row>
+  
+  <ion-row >
+    <ion-label class="label-input">Correo electrónico</ion-label>
+    </ion-row>
+    <ion-row>
+    <div style="width: 100%; text-align: center; align-content: center;">
+        <ion-item class="input-email" lines="none">
+            <ion-input type="text" class="input-text" placeholder="Ej: correo@gmail.com"></ion-input>
+          </ion-item>
+    </div>
+
+    </ion-row>
+
+    <ion-row>
+        <div style="width: 100%; align-content: center; text-align: center; padding-top: 80%;">
+            <ion-button class="button-modal-enviar">
+                <ion-label class="label-button-enviar">Enviar</ion-label>
+            </ion-button>
+        </div>
+    </ion-row>
+
+</ion-content>
+
+<ion-footer class="ion-no-border" no-shadow no-border>
+    <ion-toolbar>
+
+    </ion-toolbar>
+  </ion-footer>

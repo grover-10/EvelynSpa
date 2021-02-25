@@ -1,0 +1,169 @@
+ion-content {
+    // To get the ion-content behind the ion-header
+    position: absolute;
+    top: 0;
+    --background: #ffffff;
+
+    .label-segment{
+        font-family: 'Roboto';
+        font-style: normal;
+        font-weight: normal;
+        font-size: 16px;
+        line-height: 19px;
+  
+        color: #8F9090;
+    }
+    .button-segment{
+        text-transform: none;
+        --background: #ffffff;
+        --background-checked: #ffffff;
+        --color-checked: #8F9090;
+    }
+
+    .button-segment:hover{
+        .label-segment{
+            color: #708070;
+        }
+    }
+
+
+    .list-page-citas{
+
+        background-color: #ffffff !important;
+
+        .item-citas{
+
+            --background: #ffffff;
+            margin: auto;
+            width: 90%;
+            .fecha-item{
+                position: static;
+                width: 18px;
+                height: 18px;
+                left: 0px;
+                top: 0px;
+        
+                font-family: 'Roboto';
+                font-style: normal;
+                font-weight: 500;
+                font-size: 15px;
+                line-height: 18px;
+        
+                color: #515252;
+        
+                flex: none;
+                order: 0;
+                flex-grow: 0;
+                margin: 0px 0px;
+            }
+            .mes-item{
+                position: static;
+                height: 12px;
+                left: 0px;
+                top: 18px;
+        
+                font-family: 'Roboto';
+                font-style: normal;
+                font-weight: 300;
+                font-size: 10px;
+                line-height: 12px;
+        
+                color: #515252;
+        
+                flex: none;
+                order: 1;
+                flex-grow: 0;
+                margin: 0px 0px;
+            }
+        
+            .mod-item{
+                position: static;
+                width: 135px;
+                height: 13px;
+                left: 0px;
+                top: 0px;
+        
+                font-family: 'Roboto';
+                font-style: normal;
+                font-weight: normal;
+                font-size: 11px;
+                line-height: 13px;
+        
+                color: #708070;
+        
+                flex: none;
+                order: 0;
+                flex-grow: 0;
+                margin: 0px 0px;
+            }
+        
+            .trat-item{
+                position: static;
+                width: 160px;
+                height: 19px;
+                left: 0px;
+                top: 13px;
+        
+                font-family: 'Roboto';
+                font-style: normal;
+                font-weight: normal;
+                font-size: 16px;
+                line-height: 19px;
+                /* identical to box height */
+        
+                letter-spacing: 0.02em;
+                color: #515252;
+                flex: none;
+                order: 1;
+                flex-grow: 0;
+                margin: 0px 0px;
+            }
+        
+            .hora-item{
+                position: static;
+                width: 100px;
+                height: 16px;
+                left: 18px;
+                top: 32px;
+        
+                font-family: 'Roboto';
+                font-style: normal;
+                font-weight: normal;
+                font-size: 14px;
+                line-height: 16px;
+        
+                /* Verde medio */
+        
+                color: #708070;
+        
+                flex: none;
+                order: 1;
+                flex-grow: 0;
+                margin: 0px 0px;
+            }
+        
+        }
+    }
+
+
+
+    
+
+}
+
+ion-header{
+
+    ion-toolbar{
+        --background: transparent !important;
+
+        .title-page{
+            font-family: 'Roboto';
+            font-style: normal;
+            font-weight: 600;
+            font-size: 18px;
+            line-height: 21px;
+            color: #515252;
+        }
+        
+    }
+}

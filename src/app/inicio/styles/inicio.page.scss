@@ -1,0 +1,53 @@
+ion-content {
+    // To get the ion-content behind the ion-header
+    position: absolute;
+    top: 0;
+    --background: #ffffff;
+
+
+    .card-puntos{
+        --background: #E0E0E0;
+        margin-left: auto;
+        margin-right: auto;
+        border-radius: 15px;
+        width: 85%;
+
+        .item-card{
+            --background: transparent !important;
+
+            h2{
+                color: #708070;
+            }
+
+            p{
+                color: #515252;
+            }
+        }
+    }
+
+    .card-action{
+        align-items: center;
+        text-align: center;
+        justify-content: center;
+        width: 85%;
+        margin: auto;
+        --background: #708070;
+        border-radius: 15px;
+
+        .item-card-action{
+            --background: transparent !important;
+
+        }
+
+        
+        .label-item-action{
+            font-family: 'Roboto';
+            font-style: normal;
+            font-weight: normal;
+            font-size: 12px;
+            line-height: 14px;
+            color: #FFFFFF;
+        }
+    }
+
+}

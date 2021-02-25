@@ -1,0 +1,73 @@
+
+
+<ion-content [fullscreen]="true">
+
+  <ion-row>
+    <ion-slides pager="true" [options]="slideOpts" style="padding-top: 5%;">
+      <ion-slide>
+        <img src = "../../assets/inicio/1.png">
+    
+      </ion-slide>
+      <ion-slide>
+        <img src = "../../assets/inicio/1.png">
+     
+      </ion-slide>
+      <ion-slide>
+        <img src = "../../assets/inicio/1.png">
+     
+      </ion-slide>
+    </ion-slides>
+  </ion-row>
+
+  <ion-row>
+    <div style="width: 100%;">
+      <ion-card class="card-puntos">
+        <ion-item class="item-card" lines="none">
+          <img src = '../../assets/inicio/espiga.svg' style="margin-right: 5%;">
+          <ion-label>
+            <h2>Laura lopez</h2>
+            <p>Tienes 13 puntos</p>
+          </ion-label>
+        </ion-item>
+      </ion-card>
+    </div>
+  </ion-row>
+
+  <ion-row style="margin:5%">
+    <ion-col>
+      <ion-card class="card-action">
+        <ion-item lines="none" class="item-card-action">
+          <img src = '../../assets/inicio/regalo.svg' style="margin: auto;">
+        </ion-item>
+        <ion-card-content>
+          <ion-label class="label-item-action">Ver premios</ion-label>
+        </ion-card-content>
+      </ion-card>
+    </ion-col>
+    <ion-col>
+      <ion-card class="card-action">
+        <ion-item lines="none" class="item-card-action">
+          <img src = '../../assets/inicio/cita.svg' style="margin: auto;">
+        </ion-item>
+        <ion-card-content>
+          <ion-label  class="label-item-action">Nueva cita</ion-label>
+        </ion-card-content>
+      </ion-card>
+    </ion-col>
+
+    <ion-col>
+      <ion-card (click) = "click()" class="card-action">
+        <ion-item lines="none" class="item-card-action">
+            <img src = '../../assets/inicio/Calendarblanco.svg' style="margin: auto;">          
+        </ion-item>
+        <ion-card-content>
+          <ion-label class="label-item-action">Mis citas</ion-label>
+        </ion-card-content>
+      </ion-card>
+    </ion-col>
+    
+  </ion-row>
+
+
+
+</ion-content>
