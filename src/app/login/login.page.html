@@ -24,7 +24,7 @@
         <ion-row>
             <div style="width: 100%; text-align: center; align-content: center;">
                 <ion-item class="input-login" lines="none">
-                    <ion-input formControlName="email" type="text" class="input-text" placeholder="Ej: correo@gmail.com"></ion-input>
+                    <ion-input formControlName="email" type="email" class="input-text" placeholder="Ej: correo@gmail.com"></ion-input>
                   </ion-item>
             </div>
             <div style="width: 100%; margin-bottom: 5px;">
@@ -57,7 +57,7 @@
         </ion-row>
         <ion-row>
                 <ion-item class="item-login" lines="none" style="margin-left: 4%;" >
-                    <ion-checkbox class="checkbox-item" slot="start"></ion-checkbox>
+                    <ion-checkbox slot="start"></ion-checkbox>
                     <ion-label class="item-label">Recordar</ion-label>
                 </ion-item>
                 <ion-item class="item-login" lines="none" style="margin:auto" >
@@ -79,7 +79,7 @@
 
     <ion-row>
         <div style="width: 100%; align-content: center; text-align: center;">
-            <ion-button class="button-facebook" (click) = "irValidarDatosFacebooK()">
+            <ion-button class="button-facebook" (click) = "Entrarfacebook()">
                 <ion-icon slot="start" name="logo-facebook" style="zoom: 1.5;" ></ion-icon>
                 <ion-label class="label-button-facebook">Ingresar con facebook</ion-label>
             </ion-button>

@@ -1,0 +1,88 @@
+<ion-header no-shadow no-border class="ion-no-border">
+    <ion-toolbar>
+      <ion-buttons slot="start">
+        <ion-back-button style="content: url('../assets/icon/Arrow - Left 2.svg'); zoom: 0.8;"></ion-back-button>
+      </ion-buttons>
+      <ion-title>
+        Mis datos
+    </ion-title>
+    </ion-toolbar>
+  </ion-header>
+
+
+<ion-content no-bounce [fullscreen]="true">
+ 
+  <ion-row >
+    <ion-label class="label-input">Nombre</ion-label>
+    </ion-row>
+    <ion-row>
+    <div style="width: 100%; text-align: center; align-content: center;">
+        <ion-item class="input-email" lines="none">
+            <ion-input type="text" class="input-text" maxlength=30 placeholder="Ingresa tu nombre" [(ngModel)]="nombre" (ionChange)="verificarDatos()"></ion-input>
+          </ion-item>
+    </div>
+
+    </ion-row>
+
+    <ion-row >
+      <ion-label class="label-input">Apellido</ion-label>
+      </ion-row>
+      <ion-row>
+      <div style="width: 100%; text-align: center; align-content: center;">
+          <ion-item class="input-email" lines="none">
+              <ion-input type="text" class="input-text" maxlength=30 placeholder="Ingresa tu apellido" [(ngModel)]="apellido" (ionChange)="verificarDatos()"></ion-input>
+            </ion-item>
+      </div>
+  
+      </ion-row>
+  
+  <ion-row >
+    <ion-label class="label-input">DNI o Carnet de extranjeria</ion-label>
+    </ion-row>
+    <ion-row>
+    <div style="width: 100%; text-align: center; align-content: center;">
+        <ion-item class="input-email" lines="none">
+            <ion-input type="tel" inputmode="numeric" pattern="[0-9]" maxlength=9 class="input-text" placeholder="Ingresar número" [(ngModel)]="dni" (ionChange)="verificarDatos()"></ion-input>
+          </ion-item>
+    </div>
+
+    </ion-row>
+
+    <ion-row >
+      <ion-label class="label-input">Celular</ion-label>
+      </ion-row>
+      <ion-row>
+      <div style="width: 100%; text-align: center; align-content: center;">
+          <ion-item class="input-email" lines="none">
+              <ion-input type="tel" inputmode="numeric" maxlength=9 pattern="[0-9]" class="input-text" placeholder="Ej: 123456789" [(ngModel)]="celular" (ionChange)="verificarDatos()"></ion-input>
+            </ion-item>
+      </div>
+  
+      </ion-row>
+
+      <ion-row >
+        <ion-label class="label-input">Correo electrónico</ion-label>
+        </ion-row>
+        <ion-row>
+        <div style="width: 100%; text-align: center; align-content: center;">
+            <ion-item class="input-email" lines="none">
+                <ion-input type="email" maxlength=50 class="input-text" placeholder="Ej: correo@gmail.com" [(ngModel)]="correo" (ionChange)="verificarDatos()"></ion-input>
+              </ion-item>
+      </div>
+    </ion-row>
+
+    <ion-row>
+        <div style="width: 100%; align-content: center; text-align: center;">
+            <ion-button class="button-modal-enviar" (click)="encryptarContrasenia()" [disabled]=boton>
+                <ion-label class="label-button-enviar">Registrar</ion-label>
+            </ion-button>
+        </div>
+    </ion-row>
+
+</ion-content>
+
+<ion-footer class="ion-no-border" no-shadow no-border>
+    <ion-toolbar>
+
+    </ion-toolbar>
+  </ion-footer>

@@ -1,0 +1,352 @@
+@import "../../../theme/mixins/inputs/checkbox-tag";
+@import "../../../theme/mixins/inputs/radio-tag";
+@import "../../../theme/mixins/inputs/color-radio";
+@import "../../../theme/mixins/scrollbars";
+
+ion-content {
+    // To get the ion-content behind the ion-header
+    position: absolute;
+    top: 0;
+    --background: #ffffff;
+    .container{
+        margin-top: 20%;
+        width: 100%;
+     
+    }
+    .progressbar{
+        counter-reset: step;
+        margin-right: auto;
+        margin-left: auto;
+        
+    }
+
+    .progressbar li{
+         list-style-type: none;
+         float: left;
+         color: #000;
+         width: 25%;
+         position: relative;
+         text-align: center;
+    }
+    .progressbar li:before{
+        content: '';
+        counter-increment: step;
+        width: 20px;
+        height: 20px;
+        line-height: 20px;
+        border: 1px solid #C4C4C4;;
+        display: block;
+        text-align: center;
+        margin: 0 auto 10px auto;
+        border-radius: 50%;
+        background-color: #C4C4C4;;
+    }
+    .progressbar li:after{
+        content: '';
+        position: absolute;
+        width: 100%;
+        height: 3px;
+        background-color: #E0E0E0;
+        top: 10px;
+        left: -50%;
+        z-index: -1;
+    }
+    .progressbar li:first-child:after{
+        content: none;
+        
+    }
+
+    .progressbar li:first-child:before{
+        background-color:  #708070;
+        content: '\2713';
+        color: white;
+        border: 1px solid  #708070;
+    }
+
+    .progressbar li.active{
+        color: green;
+    }
+
+    .progressbar li.active:before{
+      border-color: #A8B898;
+      background-color: #A8B898;
+    }
+    .progressbar li.active:after{
+      border-color: #A8B898;
+      background-color: #A8B898;
+    }
+
+
+
+    .progressbar li.active + li:after{
+        background-color: #E0E0E0;
+        height: 3px;
+    }
+
+    .label-page{
+        font-family: 'Roboto';
+        font-style: normal;
+        font-weight: normal;
+        font-size: 20px;   
+        /* text */
+        
+        color: #515252;
+    }
+
+    .label-input{
+        color: #515252;
+        margin-left: 7%;
+
+        font-family: 'Roboto';
+        font-style: Regular;
+        font-weight: 400;
+        font-size: 16px;
+        line-height: 19px;
+       
+    }
+
+    .card-calendar{
+        background-color: white;
+        width: 85%;
+        margin-left: auto;
+        margin-right: auto;
+        box-shadow: none !important;
+        .label-mes{
+
+            position: absolute;
+            height: 24px;
+            left: 3.12%;
+            top: 15px;
+
+            font-family: 'Roboto';
+            font-style: normal;
+            font-weight: normal;
+            font-size: 16px;
+            line-height: 24px;
+            /* identical to box height, or 150% */
+
+
+            color: #4D5055;
+        }
+
+  
+    }
+
+    .label-day{
+        font-family: 'Roboto';
+        font-style: normal;
+        font-weight: normal;
+        font-size: 16px;
+        line-height: 24px;
+      
+        /* identical to box height, or 150% */
+
+        text-align: center;
+
+        /* Verde medio */
+    }
+    .indicator-container {
+        padding-left: 0.2rem;
+        padding-bottom: 0.1rem;
+      }
+
+
+      // CHECKBOX SELECCIONAR HORA
+      
+.checkbox-tags {
+    padding-left: 5%;
+    margin-top: 10px;
+    padding-right: 5%;
+    @include checkbox-tag();
+
+    
+    .checkbox-tag {
+      padding: 0px var(--page-tags-gutter);
+      margin: 5px;
+    }
+    
+    // Add a deeper selector to override default colors
+    &.square-checkbox-tags {
+      background-color: var(--page-background);
+    
+      .checkbox-tag {
+        --checkbox-tag-color: var(--ion-color-medium);
+        --checkbox-tag-background: var(--ion-color-lightest);
+        --checkbox-tag-active-color: var(--ion-color-lightest);
+        --checkbox-tag-active-background: var(--ion-color-secondary);
+      }
+    }
+    
+    // Add a deeper selector to override default colors
+    &.rounded-checkbox-tags {
+          background-color: var(--ion-color-lightest);
+          
+      .checkbox-tag {
+        --checkbox-tag-color: #515252;;
+        --border-radius: 10px;
+        --min-height: 30px !important;
+        --max-height: 30px !important; 
+        --checkbox-tag-background: transparent;
+        --checkbox-tag-active-color: #515252;;
+        --checkbox-tag-active-background: #A8B898;
+      }
+    
+      .div-border{
+        border: solid 1px #a8b898; 
+        border-radius: 10px;
+        max-width: 63px;
+        min-width: 63px;
+        min-height: 30px;
+        max-height: 30px;
+      }
+    }
+}
+       
+///////// COUNTER PERSONAS ATENCION 
+.container-counter{
+    --counter-size: 30px;
+    margin-left: 7%;
+    margin-top: 10px;
+    border-radius: 4px;
+    border: 0.6px solid #A8B898 !important;
+  
+    display: flex;
+    align-items: center;
+    justify-content: flex-end;
+  
+    ion-button.counter-icon {
+      --background: #fffff;
+      --background-activated: #708070;
+      --color: #8f9090;
+      --color-activated: #708070;;
+      --border-width: 0px;
+      --border-style: solid;
+      --border-color: 0.6px solid #A8B898;
+      --border-left: 0.6px;
+      --box-shadow: none;
+      --padding-bottom: 3px;
+      --padding-end: 3px;
+      --padding-start: 3px;
+      --padding-top: 3px;
+      zoom: 0.6;
+      margin: 0px;
+    }
+  
+    .counter-value {
+      color: #515252;
+      margin: 0px 10px;
+    }
+  
+    &:not([basic]) {
+      // Force each counter button to have a 1:1 aspect ratio
+      .button-outer {
+        width: var(--counter-size);
+  
+        .button-wrapper {
+          display: block;
+          overflow: hidden;
+          position: relative;
+          width: 100%;
+     
+          border-right: 0.6px solid #A8B898;
+          padding-bottom: 100%;
+  
+          .counter-icon {
+            position: absolute;
+            top: 0px;
+            bottom: 0px;
+            left: 0px;
+            right: 0px;
+            height: auto;
+            width: 100%;
+          }
+        }
+
+        .button-wrapper2 {
+            display: block;
+            overflow: hidden;
+            position: relative;
+            width: 100%;
+            border-left: 0.6px solid #A8B898;
+            
+            padding-bottom: 100%;
+    
+            .counter-icon {
+              position: absolute;
+              top: 0px;
+              bottom: 0px;
+              left: 0px;
+              right: 0px;
+              height: auto;
+              width: 100%;
+            }
+          }
+
+      }
+    }
+}
+
+.item-radio-group{
+    --background: transparent !important;
+    
+    .item-label{
+        color: #515252;
+        font-family: 'Roboto';
+        font-style: normal;
+        font-weight: normal;
+        font-size: 14px;
+        line-height: 16px;
+
+    }
+    ion-radio{
+        --color: #708070;
+        --color-checked: #708070;
+    }
+}
+
+.button-continuar{
+    --background: #708070;
+    --color-activated: #ffffff;
+    --background-activated: #708070;
+    text-transform: none;
+    --box-shadow: none;
+    width: 86%;
+    --border-radius: 25px;
+    height: 50px;
+    margin-top: 10px;
+    margin-bottom: 7%;
+    .label-button-continuar{
+        color: #ffffff;
+        font-family: Roboto;
+        font-style: normal;
+        font-weight: 500;
+        font-size: 20px;
+        line-height: 23px;
+    }
+
+}
+
+}
+
+ion-header{
+
+    ion-toolbar{
+        --background: transparent !important;
+        
+        .title-page{
+            font-family: 'Roboto';
+            font-style: normal;
+            font-weight: 500;
+            font-size: 18px;
+            color: #515252;
+        }
+    }
+}
+
+ion-footer{
+
+    ion-toolbar{
+        --background: transparent !important;
+
+    }
+}

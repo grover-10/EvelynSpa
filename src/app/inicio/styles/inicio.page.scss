@@ -30,12 +30,15 @@ ion-content {
         text-align: center;
         justify-content: center;
         width: 85%;
+        height: 110px;
         margin: auto;
         --background: #708070;
         border-radius: 15px;
 
         .item-card-action{
             --background: transparent !important;
+            margin-top: 10px;
+            text-align: left;
 
         }
 
@@ -44,6 +47,7 @@ ion-content {
             font-family: 'Roboto';
             font-style: normal;
             font-weight: normal;
+            margin: auto;
             font-size: 12px;
             line-height: 14px;
             color: #FFFFFF;

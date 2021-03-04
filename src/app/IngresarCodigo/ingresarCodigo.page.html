@@ -1,0 +1,51 @@
+<ion-header no-shadow no-border class="ion-no-border">
+    <ion-toolbar>
+      <ion-buttons slot="start">
+        <ion-back-button style="content: url('../assets/icon/Arrow - Left 2.svg'); zoom: 0.8;"></ion-back-button>
+      </ion-buttons>
+    </ion-toolbar>
+  </ion-header>
+
+
+<ion-content no-bounce [fullscreen]="true">
+    <ion-row>
+        <img src ="../assets/icon/send.svg" class="img-login"  />
+    </ion-row>
+    <ion-row>
+          <div style="width: 100%; text-align: center; padding-top: 15%;">
+              <ion-label >
+                  <h2 class="label-page"><b>Ingresa el código que te hemos enviado a tu correo</b></h2>
+              </ion-label>
+          </div>
+    </ion-row>
+    <ion-row>
+        <div style="width: 100%; text-align: center;">
+            <ion-item class="input-login" lines="none">    
+                <ion-input  type="text" class="input-text"></ion-input>
+              </ion-item>
+        </div>
+    </ion-row>
+
+    <ion-row>
+        <div style="width: 100%; text-align: center; padding-top: 3%;">
+            <ion-label >
+                <h3 class="label-page2">Te hemos enviado un código de seguridad para que cambies tu contraseña. Si no encuentras el correo en tu bandeja  de entrada, revisa la carpeta de Spam o haz clic en <ion-label style="color: black;" (click)="enviarCorreo()">volver a enviar</ion-label></h3>
+            </ion-label>
+        </div>
+  </ion-row>
+  
+    <ion-row>
+        <div style="width: 100%; align-content: center; text-align: center; padding-top: 50%;">
+    
+                <ion-label class="label-button-enviar" (click)="irLogin()">Ir al Inicio de sesión</ion-label>
+         
+        </div>
+    </ion-row>
+
+</ion-content>
+
+<ion-footer class="ion-no-border" no-shadow no-border>
+    <ion-toolbar>
+
+    </ion-toolbar>
+  </ion-footer>

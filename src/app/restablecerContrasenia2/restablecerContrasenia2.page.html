@@ -1,0 +1,37 @@
+<ion-header no-shadow no-border class="ion-no-border">
+    <ion-toolbar>
+      <ion-buttons slot="start">
+        <ion-back-button style="content: url('../assets/icon/Arrow - Left 2.svg'); zoom: 0.8;"></ion-back-button>
+      </ion-buttons>
+    </ion-toolbar>
+  </ion-header>
+
+
+<ion-content no-bounce [fullscreen]="true">
+ 
+    <ion-row>
+        <img src ="../assets/icon/exito.svg" class="img-login"  />
+    </ion-row>
+    <ion-row>
+          <div style="width: 100%; text-align: center; padding-top: 5%;">
+              <ion-label >
+                  <h2 class="label-page"><b>Has cambiado tu contraseña exitosamente</b></h2>
+              </ion-label>
+          </div>
+    </ion-row>
+
+    <ion-row>
+        <div style="width: 100%; align-content: center; text-align: center; padding-top: 10%;">
+            <ion-button class="button-modal-enviar" (click)="irLogin()">
+                <ion-label class="label-button-enviar">Ir al inicio de sesión</ion-label>
+            </ion-button>
+        </div>
+    </ion-row>
+
+</ion-content>
+
+<ion-footer class="ion-no-border" no-shadow no-border>
+    <ion-toolbar>
+
+    </ion-toolbar>
+  </ion-footer>

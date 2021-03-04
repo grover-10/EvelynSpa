@@ -1,0 +1,128 @@
+<ion-header no-shadow no-border class="ion-no-border">
+    <ion-toolbar #toolbar>
+      <ion-buttons slot="start">
+        <ion-back-button style="content: url('../assets/icon/Arrow - Left 2.svg'); zoom: 0.8;"></ion-back-button>
+      </ion-buttons>
+      <ion-title class="title-page">Agenda tu cita</ion-title>
+    </ion-toolbar>
+  </ion-header>
+  
+  <ion-content [fullscreen]="true" [scrollEvents] = "true"  [appHideHeader] = "toolbar">
+
+    <ion-row>
+        <div class="container">
+          <ul class="progressbar">
+     
+           <li></li>
+           <li class="complete"></li>
+           <li class="active"></li>
+           <li></li>
+     
+          </ul>
+        </div>
+      </ion-row>
+      <ion-row>
+        <div style="width: 100%; text-align: center;">
+          <ion-label class="label-page">Datos</ion-label>
+        </div>
+     </ion-row>
+      <form style="margin-top: 20px;" [formGroup]="myForm" (ngSubmit)="onSubmit()" novalidate>
+        <ion-row>
+          <ion-label class="label-input">Nombres</ion-label>
+      </ion-row>
+      <ion-row>
+          <div style="width: 100%; text-align: center; align-content: center;">
+              <ion-item class="input-item" lines="none">
+                  <ion-input formControlName="nombres" type="text" class="input-text" placeholder="Nombres"></ion-input>
+                </ion-item>
+          </div>
+          <div style="width: 100%; margin-bottom: 5px;">
+              <span class="error ion-padding error-input" *ngIf="submitted && errorControl.nombres.errors?.required">
+                  <ion-label class="label-error">nombre es requerido.</ion-label>
+                </span>
+          </div>
+  
+      </ion-row>
+      <ion-row>
+        <ion-label class="label-input">Apellidos</ion-label>
+    </ion-row>
+    <ion-row>
+        <div style="width: 100%; text-align: center; align-content: center;">
+            <ion-item class="input-item" lines="none">
+                <ion-input formControlName="apellidos" type="text" class="input-text" placeholder="Apellidos"></ion-input>
+              </ion-item>
+        </div>
+        <div style="width: 100%; margin-bottom: 5px;">
+            <span class="error ion-padding error-input" *ngIf="submitted && errorControl.apellidos.errors?.required">
+                <ion-label class="label-error">Apellido es requerido.</ion-label>
+              </span>
+        </div>
+    </ion-row>
+    <ion-row>
+      <ion-label class="label-input">Celular</ion-label>
+  </ion-row>
+  <ion-row>
+      <div style="width: 100%; text-align: center; align-content: center;">
+          <ion-item class="input-item" lines="none">
+              <ion-input formControlName="celular" type="text" class="input-text" placeholder="celular"></ion-input>
+            </ion-item>
+      </div>
+      <div style="width: 100%; margin-bottom: 5px;">
+          <span class="error ion-padding error-input" *ngIf="submitted && errorControl.celular.errors?.required">
+              <ion-label class="label-error">Celular es requerido.</ion-label>
+            </span>
+            <span class="error ion-padding error-input" *ngIf="submitted && errorControl.celular.errors?.pattern">
+              <ion-label class="label-error">Ingrese solo números.</ion-label>
+            </span>
+            <span class="error ion-padding error-input" *ngIf="submitted && errorControl.celular.errors?.minLength">
+              <ion-label class="label-error">Ingrese un número válido.</ion-label>
+            </span>
+      </div>
+
+  </ion-row>
+        <ion-row>
+            <ion-label class="label-input">Correo electrónico</ion-label>
+        </ion-row>
+        <ion-row>
+            <div style="width: 100%; text-align: center; align-content: center;">
+                <ion-item class="input-item" lines="none">
+                    <ion-input formControlName="email" type="text" class="input-text" placeholder="Ej: correo@gmail.com"></ion-input>
+                  </ion-item>
+            </div>
+            <div style="width: 100%; margin-bottom: 5px;">
+                <span class="error ion-padding error-input" *ngIf="submitted && errorControl.email.errors?.required">
+                    <ion-label class="label-error">Email es requerido.</ion-label>
+                  </span>
+                  <span class="error ion-padding error-input" *ngIf="submitted && errorControl.email.errors?.pattern">
+                    <ion-label class="label-error">Ingrese un email válido.</ion-label>
+                  </span>
+            </div>
+    
+        </ion-row>
+
+        <ion-row>
+          <ion-label class="label-input">Dirección</ion-label>
+      </ion-row>
+      <ion-row>
+          <div style="width: 100%; text-align: center; align-content: center;">
+              <ion-item class="input-item" lines="none">
+                  <ion-input formControlName="direccion" type="text" class="input-text" placeholder="Tu dirección"></ion-input>
+                </ion-item>
+          </div>
+          <div style="width: 100%; margin-bottom: 5px;">
+              <span class="error ion-padding error-input" *ngIf="submitted && errorControl.direccion.errors?.required">
+                  <ion-label class="label-error">direccion es requerida.</ion-label>
+                </span>
+          </div>
+  
+      </ion-row>
+        
+        <ion-row>
+            <div style="width: 100%; align-content: center; text-align: center;">
+                <ion-button class="button-guardar" type="submit">
+                    <ion-label class="label-button-guardar">Guardar</ion-label>
+                </ion-button>
+            </div>
+        </ion-row>
+    </form>
+  </ion-content>

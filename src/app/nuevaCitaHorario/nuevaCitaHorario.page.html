@@ -1,0 +1,179 @@
+<ion-header no-shadow no-border class="ion-no-border">
+    <ion-toolbar #toolbar>
+      <ion-buttons slot="start">
+        <ion-back-button style="content: url('../assets/icon/Arrow - Left 2.svg'); zoom: 0.8;"></ion-back-button>
+      </ion-buttons>
+      <ion-title class="title-page">Agenda tu cita</ion-title>
+    </ion-toolbar>
+  </ion-header>
+  
+  <ion-content [fullscreen]="true" [scrollEvents] = "true"  [appHideHeader] = "toolbar">
+
+    <ion-row>
+        <div class="container">
+          <ul class="progressbar">
+     
+           <li></li>
+           <li class="active"></li>
+           <li></li>
+           <li></li>
+     
+          </ul>
+        </div>
+      </ion-row>
+
+      <ion-row>
+        <div style="width: 100%; text-align: center;">
+          <ion-label class="label-page">Fecha y hora</ion-label>
+        </div>
+     </ion-row>
+     <ion-row  style="margin-top: 20px;">
+        <ion-label class="label-input">Seleccionar un día</ion-label>
+      </ion-row>
+
+      <ion-card class="card-calendar">
+        <ion-row>
+            <ion-col size="8" class="ion-text-center">
+              <ion-label class="label-mes">{{ viewTitle }}</ion-label>
+            </ion-col>
+            
+            <!-- Mes anterior -->
+            <ion-col size="2">
+              <ion-button fill="clear" (click)="back()">
+                <ion-icon style="color: #8F9090;" name="chevron-back-outline"></ion-icon>
+              </ion-button>
+            </ion-col>
+         
+            <!-- Mes siguiente -->
+            <ion-col size="2">
+              <ion-button fill="clear" (click)="next()">
+                <ion-icon  style="color: #8F9090;"  name="chevron-forward-outline"></ion-icon>
+              </ion-button>
+            </ion-col>
+          </ion-row>
+
+          
+        <calendar 
+        [eventSource]="eventSource"
+        [calendarMode]="calendar.mode"
+        [currentDate]="calendar.currentDate"
+        (onTitleChanged)="onViewTitleChanged($event)"
+        (onCurrentDateChanged)="onCurrentDateChanged($event)"
+        [showEventDetail] = "false"
+        startHour="6"
+        endHour="20"
+        step="30"
+        startingDayWeek="1"
+        [monthviewDisplayEventTemplate]="template"
+      >
+      </calendar>
+      <ng-template #template let-view="view" let-row="row" let-col="col">
+        <div class="label-day"  [class.with-event]="view.dates[row*7+col].events.length">
+          {{view.dates[row*7+col].label}}
+          <div class="indicator-container">
+            <div class="event-indicator" *ngFor="let e of view.dates[row*7+col].events"></div>
+          </div>
+        </div>
+      </ng-template>
+      </ion-card>
+
+      <ion-row style="margin-top: 10px;">
+        <ion-label class="label-input">Seleccionar una hora</ion-label>
+      </ion-row>
+
+      <ion-row class="checkbox-tags rounded-checkbox-tags">
+
+        <ion-item lines="none" class="checkbox-tag rounded-tag" >
+          <div class="div-border">
+            <ion-label class="tag-label">9:00</ion-label>
+            <ion-checkbox></ion-checkbox>
+          </div>
+        </ion-item>
+        <ion-item lines="none" class="checkbox-tag rounded-tag" >
+          <div class="div-border">
+            <ion-label class="tag-label">10:00</ion-label>
+            <ion-checkbox></ion-checkbox>
+          </div>
+       </ion-item>
+       <ion-item lines="none" class="checkbox-tag rounded-tag" >
+        <div class="div-border">
+          <ion-label class="tag-label">11:00</ion-label>
+          <ion-checkbox></ion-checkbox>
+        </div>
+       </ion-item>
+       <ion-item lines="none" class="checkbox-tag rounded-tag" >
+        <div class="div-border">
+          <ion-label class="tag-label">12:00</ion-label>
+          <ion-checkbox></ion-checkbox>
+        </div>
+      </ion-item>
+      <ion-item lines="none" class="checkbox-tag rounded-tag" >
+        <div class="div-border">
+          <ion-label class="tag-label">14:00</ion-label>
+          <ion-checkbox></ion-checkbox>
+        </div>
+     </ion-item>
+     <ion-item lines="none" class="checkbox-tag rounded-tag" >
+      <div class="div-border">
+        <ion-label class="tag-label">15:00</ion-label>
+        <ion-checkbox></ion-checkbox>
+      </div>
+     </ion-item>
+      </ion-row>
+
+      <ion-row style="margin-top: 10px;">
+        <ion-label class="label-input">¿Cuántas personas requieren atención?</ion-label>
+      </ion-row>
+
+      <ion-row>
+
+        <div class="container-counter">
+          <div class="button-outer">
+            <div class="button-wrapper">
+              <ion-button class="counter-icon">
+                <ion-icon slot="icon-only" name="remove"></ion-icon>
+              </ion-button>
+            </div>
+          </div>
+          <span class="counter-value">1</span>
+          <div class="button-outer">
+            <div class="button-wrapper2">
+              <ion-button class="counter-icon">
+                <ion-icon slot="icon-only" name="add"></ion-icon>
+              </ion-button>
+            </div>
+          </div>
+        </div>
+
+      </ion-row>
+
+      <ion-row style="margin-top: 10px;">
+        <ion-label class="label-input">Modalidad:</ion-label>
+      </ion-row>
+
+      <ion-row>
+        <div style="width: 100%; margin-left: 4%;">
+          <ion-radio-group value="Local">
+            <ion-row>
+              <ion-item class="item-radio-group" lines="none">
+                <ion-label class="item-label">Local</ion-label>
+                <ion-radio slot="start" value="Local"></ion-radio>
+              </ion-item>
+              <ion-item class="item-radio-group" lines="none">
+                <ion-label class="item-label">Domicilio</ion-label>
+                <ion-radio slot="start" value="Domicilio"></ion-radio>
+              </ion-item>
+            </ion-row>
+          </ion-radio-group>
+        </div>
+      </ion-row>
+
+      <ion-row>
+        <div style="width: 100%; align-content: center; text-align: center;">
+            <ion-button class="button-continuar" type="button" (click) = "irNuevaCitaDatos()">
+                <ion-label class="label-button-continuar">Continuar</ion-label>
+            </ion-button>
+        </div>
+    </ion-row>
+
+  </ion-content>

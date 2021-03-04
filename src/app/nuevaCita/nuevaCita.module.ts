@@ -5,6 +5,7 @@ import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 import { nuevaCitaPage } from './nuevaCita.page';
 import { ExploreContainerComponentModule } from '../explore-container/explore-container.module';
+import { SharedDirectivesModule } from '../directives/shared-directives.module';
 
 const routes: Routes = [
   {
@@ -19,6 +20,7 @@ const routes: Routes = [
     FormsModule,
     ExploreContainerComponentModule,
     IonicModule,
+    SharedDirectivesModule,
     RouterModule.forChild(routes)
   ],
   declarations: [nuevaCitaPage]

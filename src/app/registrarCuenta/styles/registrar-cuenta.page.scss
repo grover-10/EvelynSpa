@@ -4,17 +4,7 @@ ion-content {
     top: 0;
     --background: #ffffff;
 
-    ion-title{
-        color: #343535;
-        padding-left: 10%;
-        padding-right: 10%;
-        font-family: 'Roboto';
-        font-style: normal;
-        font-weight: 500;
-        font-size: 17px;
-        line-height: 21px;
-        font-weight: bold;
-    }
+
     .item-login{
       
         --background: transparent !important;
@@ -150,6 +140,16 @@ ion-header{
 
     ion-toolbar{
         --background: transparent !important;
+
+        ion-title{
+    
+            font-family: 'Roboto';
+            font-style: normal;
+            font-weight: 500;
+            font-size: 18px;
+            color: #515252;
+            
+        }
         
     }
 }

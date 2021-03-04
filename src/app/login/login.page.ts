@@ -9,6 +9,7 @@ import { LoadingController } from '@ionic/angular';
 import { AlertController } from '@ionic/angular';
 import { Facebook} from '@ionic-native/facebook/ngx';
 import { Plugins } from '@capacitor/core';
+import { AES256 } from '@ionic-native/aes-256/ngx';
 const { Storage } = Plugins;
 
 export interface Slide {
@@ -26,9 +27,12 @@ export interface Slide {
 export class loginPage implements OnInit{
 
 
-  myForm: FormGroup;
-  submitted = false;
-  isLoading = false;
+  public myForm: FormGroup;
+  public submitted = false;
+  public isLoading = false;
+
+  private secureKey: string = "7666733f9a8ce733904a5b8e61f10f17";
+  private secureIV: string = "0b89fb94afe731fe";
 
   constructor(private router:Router,
               private modalController:ModalController,
@@ -36,17 +40,18 @@ export class loginPage implements OnInit{
               public service: ServiceService,
               public alertController: AlertController,
               public facebook: Facebook,
+              private aes256: AES256,
               public loadingController: LoadingController){
 
   }
 
   ngOnInit(){
-        this.myForm = this.formBuilder.group({
-          email: ['', [Validators.required, Validators.pattern('[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,3}$')]],
-          password: ['', [Validators.required, Validators.minLength(8)]]
-        })
-       
-  }
+    this.myForm = this.formBuilder.group({
+      email: ['', [Validators.required, Validators.pattern('[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,3}$')]],
+      password: ['', [Validators.required, Validators.minLength(8)]]
+    });
+ 
+}
 
 
 ///////// RUTAS ///////////////
@@ -87,7 +92,20 @@ export class loginPage implements OnInit{
 
   validarLogin(login){
     let datosLogin = {correo: login.email, contrasenia: login.password};
-    this.postValidarlogin(datosLogin);
+    this.encryptarContrasenia(datosLogin)
+  }
+
+  encryptarContrasenia(datosLogin){
+    this.aes256.encrypt(this.secureKey,this.secureIV,datosLogin.contrasenia).then(res =>{
+   
+      datosLogin.contrasenia = res;
+      this.postValidarlogin(datosLogin);
+
+    })
+    .catch(er =>{
+      console.log(er);
+    });
+
   }
 
   postValidarlogin(datosLogin){
@@ -102,6 +120,7 @@ export class loginPage implements OnInit{
         this.modalErrorLogin();
       }else{
         
+        this.guardarStorage(data);
         this.dismiss();
         this.router.navigate(['tabs/inicio']);
       }     
@@ -114,6 +133,8 @@ export class loginPage implements OnInit{
 
     });
   }
+
+
 
 
 //////////////// LOADING LOGIN //////////////////
@@ -206,7 +227,7 @@ export class loginPage implements OnInit{
         console.log("usuarios registrado");
         console.log(res);
 
-        if(res == 1){
+        if(res == 2){
 
           let navigationExtras: NavigationExtras = {
             state: {
@@ -218,7 +239,7 @@ export class loginPage implements OnInit{
 
         }else{
 
-          if(res == 2){
+          if(res == 3){
 
             this.AlertCorreoExistente();
 
@@ -237,7 +258,7 @@ export class loginPage implements OnInit{
   }
 
   async guardarStorage(user){
-    await Storage.set({key:'idusuario',value:user.idusuario});
+    await Storage.set({key:'idusuario',value:user[0].idusuario});
   }
 
   async alertaErrorConexionFB() {

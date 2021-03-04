@@ -16,4 +16,10 @@ export interface Slide {
 
 export class olvidoContraseniaPage {
 
+  constructor(public router:Router){}
+
+  irIngresarCodigo(){
+        this.router.navigate(['ingresarCodigo']);
+  }
+
 }

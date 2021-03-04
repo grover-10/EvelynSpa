@@ -25,6 +25,38 @@ const routes: Routes = [
     path: 'nuevaCita',
     loadChildren: () => import('./nuevaCita/nuevaCita.module').then(m => m.nuevaCitaModule)
   },
+  {
+    path: 'nuevaCitaHorario',
+    loadChildren: () => import('./nuevaCitaHorario/nuevaCitaHorario.module').then(m => m.nuevaCitaHorarioModule)
+  },
+  {
+    path: 'nuevaCitaDatos',
+    loadChildren: () => import('./nuevaCitaDatos/nuevaCitaDatos.module').then(m => m.nuevaCitaDatosModule)
+  },
+  {
+    path: 'nuevaCitaDetalle',
+    loadChildren: () => import('./nuevaCitaDetalle/nuevaCitaDetalle.module').then(m => m.nuevaCitaDetalleModule)
+  },
+  {
+    path: 'ingresarCodigo',
+    loadChildren: () => import('./ingresarCodigo/ingresarCodigo.module').then(m => m.ingresarCodigoModule)
+  },
+  {
+    path: 'restablecerContrasenia',
+    loadChildren: () => import('./restablecerContrasenia/restablecerContrasenia.module').then(m => m.restablecerContraseniaModule)
+  },
+  {
+    path: 'restablecerContrasenia2',
+    loadChildren: () => import('./restablecerContrasenia2/restablecerContrasenia2.module').then(m => m.restablecerContrasenia2Module)
+  },
+  {
+    path: 'misDatos',
+    loadChildren: () => import('./misDatos/misDatos.module').then(m => m.misDatosModule)
+  },
+  {
+    path: 'miPuntaje',
+    loadChildren: () => import('./miPuntaje/miPuntaje.module').then(m => m.miPuntajeModule)
+  },
 ];
 @NgModule({
   imports: [

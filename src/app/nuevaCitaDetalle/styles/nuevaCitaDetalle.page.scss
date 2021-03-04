@@ -1,0 +1,208 @@
+
+ion-content {
+    // To get the ion-content behind the ion-header
+    position: absolute;
+    top: 0;
+    --background: #ffffff;
+    .container{
+        margin-top: 20%;
+        width: 100%;
+     
+    }
+    
+    .progressbar{
+        counter-reset: step;
+        margin-right: auto;
+        margin-left: auto;
+        
+    }
+
+    .progressbar li{
+         list-style-type: none;
+         float: left;
+         color: #000;
+         width: 25%;
+         position: relative;
+         text-align: center;
+    }
+    .progressbar li:before{
+        content: '';
+        counter-increment: step;
+        width: 20px;
+        height: 20px;
+        line-height: 20px;
+        border: 1px solid #C4C4C4;;
+        display: block;
+        text-align: center;
+        margin: 0 auto 10px auto;
+        border-radius: 50%;
+        background-color: #C4C4C4;;
+    }
+    .progressbar li:after{
+        content: '';
+        position: absolute;
+        width: 100%;
+        height: 3px;
+        background-color: #E0E0E0;
+        top: 10px;
+        left: -50%;
+        z-index: -1;
+    }
+    .progressbar li:first-child:after{
+        content: none;
+        
+    }
+
+    .progressbar li:first-child:before{
+        background-color:  #708070;
+        content: '\2713';
+        color: white;
+        border: 1px solid  #708070;
+    }
+
+    .progressbar li.active{
+        color: green;
+        
+
+    }
+    .progressbar li.active:before{
+      border-color: #A8B898;
+      background-color: #A8B898;
+    }
+
+    .progressbar li.active:after{
+        border-color: #A8B898;
+        background-color: #A8B898;
+      }
+
+      .progressbar li.complete:before{
+        border-color: #708070;
+        content: '\2713';
+        color: white;
+        background-color: #708070;
+      }
+      .progressbar li.complete:after{
+        background-color: #A8B898;
+      }
+  
+
+    .progressbar li.active + li:after{
+        background-color: #E0E0E0;
+        height: 3px;
+    }
+
+    .label-page{
+        font-family: 'Roboto';
+        font-style: normal;
+        font-weight: normal;
+        font-size: 20px;   
+        /* text */
+        
+        color: #515252;
+    }
+
+    .label-input{
+        color: #515252;
+        margin-left: 7%;
+        font-family: 'Roboto';
+        font-style: Regular;
+        font-weight: 400;
+        font-size: 16px;
+        line-height: 19px;
+       
+    }
+
+    .card-items-perfil{
+        --background: #ffffff !important; 
+        box-shadow: none !important;
+        width: 90%;
+        margin-top: 2%;
+        margin-left: auto;
+        margin-right: auto;
+
+        .item-menu{
+            margin-top: 15px;
+            margin-bottom: 10px;
+            --background: transparent !important;
+            --box-shadow: none;
+             font-family: 'Roboto';
+             font-style: normal;
+             font-weight: normal;
+             font-size: 16px;
+             line-height: 19px;
+             border: 1px solid #BDBDBD;
+             border-radius: 16px !important;        
+             --color: #515252;
+
+
+
+        }
+
+        .list-detalle{
+            background-color: transparent !important;
+             
+            .item-list{
+                --background: transparent !important;
+                height: 35px !important;
+                --min-height:  35px !important;
+                border-bottom: 0px solid #E0E0E0;
+                
+                .label-list{
+                    font-family: 'Roboto';
+                    font-style: normal;
+                    font-weight: normal;
+                    font-size: 16px;
+                    line-height: 19px;
+                    color: #515252;
+                }
+            }
+        }
+    }
+
+    .button-continuar{
+        --background: #708070;
+        --color-activated: #ffffff;
+        --background-activated: #708070;
+        text-transform: none;
+        --box-shadow: none;
+        width: 86%;
+        --border-radius: 25px;
+        height: 50px;
+        margin-top: 10px;
+        margin-bottom: 7%;
+        .label-button-continuar{
+            color: #ffffff;
+            font-family: Roboto;
+            font-style: normal;
+            font-weight: 500;
+            font-size: 20px;
+            line-height: 23px;
+        }
+    
+    }
+
+
+}
+
+ion-header{
+
+    ion-toolbar{
+        --background: transparent !important;
+        
+        .title-page{
+            font-family: 'Roboto';
+            font-style: normal;
+            font-weight: 500;
+            font-size: 18px;
+            color: #515252;
+        }
+    }
+}
+
+ion-footer{
+
+    ion-toolbar{
+        --background: transparent !important;
+
+    }
+}

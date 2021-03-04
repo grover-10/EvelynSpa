@@ -1,5 +1,5 @@
 <ion-header no-shadow no-border class="ion-no-border">
-    <ion-toolbar>
+    <ion-toolbar #toolbar1>
       <ion-buttons slot="start">
         <ion-back-button style="content: url('../assets/icon/Arrow - Left 2.svg'); zoom: 0.8;"></ion-back-button>
       </ion-buttons>
@@ -10,7 +10,7 @@
   </ion-header>
 
 
-<ion-content no-bounce [fullscreen]="true">
+<ion-content [fullscreen]="true" [scrollEvents] = "true"  [appHideHeader] = "toolbar1">
  
   <ion-row >
     <ion-label class="label-input">Nombre</ion-label>

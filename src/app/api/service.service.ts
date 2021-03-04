@@ -7,15 +7,18 @@ import {HttpClient, HttpHeaders} from '@angular/common/http';
 export class ServiceService {
 
   private options: any ={ headers: new HttpHeaders({'Content-Type': 'application/json',})};
-  url = 'https://EvelynSpa.com.pe/EvelynSpá/api';
+  url = 'https://bube.com.pe/evelynspa/api';
   url2 = 'http://localhost:8080/api';
+  url3 = 'https://evelynspaperu.com:8080/evelynspa/api'
+
+  
 
   constructor(public http: HttpClient) { }
 
 
   postValidarLogin(data){
     return new Promise((resolve, reject) => {
-      this.http.post(this.url2+'/usuario/login',data,this.options)
+      this.http.post(this.url+'/usuario/login',data,this.options)
       .subscribe(Response => {
         resolve(Response);
       }, (error) => {

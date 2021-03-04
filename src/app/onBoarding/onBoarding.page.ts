@@ -16,7 +16,7 @@ export interface Slide {
 export class onBoardingPage{
 
     slideOpts = {
-        initialSlide: 1,
+        initialSlide: 0,
       };
 
       slides: Slide[];

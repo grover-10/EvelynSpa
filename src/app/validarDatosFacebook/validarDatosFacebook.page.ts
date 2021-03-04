@@ -19,19 +19,19 @@ const { Storage } = Plugins;
 
 export class validarDatosFacebookPage implements OnInit{
 
-    myForm: FormGroup;
-    submitted = false;
-
-    datosFacebook;
+    public myForm: FormGroup;
+    public submitted = false;
+    public datosFacebook:any;
 
     constructor( public formBuilder: FormBuilder,
                  public router: Router,
+                 public service: ServiceService,
                  public route: ActivatedRoute){
 
         this.route.queryParams.subscribe(params => {
             if (this.router.getCurrentNavigation().extras.state) {
                this.datosFacebook = this.router.getCurrentNavigation().extras.state.usuario;
-
+                console.log(this.datosFacebook);
             } 
           });
 
@@ -43,13 +43,17 @@ export class validarDatosFacebookPage implements OnInit{
           celular: ['', [Validators.required, Validators.pattern('^[0-9]+$'),Validators.minLength(9)]],
           dni: ['', [Validators.required, Validators.minLength(8),Validators.maxLength(8)]],
           checkbox: [false]
-        })
+        });
 
-        this.myForm.value.email = this.datosFacebook.email;
-        this.myForm.value.celular = this.datosFacebook.celular;
-        this.myForm.value.dni = this.datosFacebook.dni;
-
-       
+        let email = (this.datosFacebook.correo == null || this.datosFacebook.correo == undefined) ? '': this.datosFacebook.correo;
+    
+        this.myForm.setValue({
+          email: email,
+          celular: '',
+          dni: '',
+          checkbox: false
+        });
+    
   }
 
   onSubmit() {
@@ -58,9 +62,35 @@ export class validarDatosFacebookPage implements OnInit{
        console.log('Llena todos los datos!')
       return false;
     } else {
-      console.log(this.myForm.value)
- 
+    
+
+      this.datosFacebook.email = this.myForm.value.email;
+      this.datosFacebook.celular = this.myForm.value.celular;
+      this.datosFacebook.dni = this.myForm.value.dni;
+      this.datosFacebook.publicidad = (this.myForm.value.checkbox == true) ? 1:0;
+      
+      console.log(this.datosFacebook);
+      this.postRegistrarUsuario(this.datosFacebook);
+
     }
+  }
+
+  postRegistrarUsuario(usuario){
+    this.service.registrarUsuario(usuario)
+    .then(res =>{
+
+      console.log("usuarios registrado");
+      console.log(res);
+      this.guardarStorage(res);
+      this.router.navigate(['tabs/inicio']);
+    })
+    .catch(er =>{
+      console.log(er);
+    });
+  }
+
+  async guardarStorage(user){
+    await Storage.set({key:'usuario',value:user});
   }
 
   get errorControl() {
