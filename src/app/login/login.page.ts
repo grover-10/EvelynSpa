@@ -258,7 +258,7 @@ export class loginPage implements OnInit{
   }
 
   async guardarStorage(user){
-    await Storage.set({key:'idusuario',value:user[0].idusuario});
+    await Storage.set({key:'idusuario',value:JSON.stringify(user[0])});
   }
 
   async alertaErrorConexionFB() {

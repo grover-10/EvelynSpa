@@ -1,6 +1,8 @@
 import { Component } from '@angular/core';
-import {Router} from '@angular/router';
+import {Router,ActivatedRoute} from '@angular/router';
 import { ModalController } from '@ionic/angular';
+import { data } from 'jquery';
+import { ServiceService } from '../api/service.service';
 import {modalCitaReservadaPage} from '../modals/modalCitaReservada/modalCitaReservada.page';
 @Component({
   selector: 'app-nuevaCitaDetalle',
@@ -17,8 +19,19 @@ export class nuevaCitaDetallePage{
 
   public lista1 = false;
   public lista2 = false;
+  public nuevaCita;
+  
+  constructor(private modalController:ModalController,
+    public router: Router,  
+    public service: ServiceService,
+    private route:ActivatedRoute,){
 
-  constructor(private modalController:ModalController){}
+    this.route.queryParams.subscribe(params => {
+      if (this.router.getCurrentNavigation().extras.state) {
+          this.nuevaCita = this.router.getCurrentNavigation().extras.state.nuevaCita;
+      }
+    });
+  }
   
   expandirTratamiento(val){
 
@@ -51,7 +64,21 @@ export class nuevaCitaDetallePage{
   }
 
   registrarCita(){
-    this.modalCitaReservada();
+    console.log(this.nuevaCita);
+    this.postRegistrarCita(this.nuevaCita);
+    
+  }
+
+  postRegistrarCita(data){
+    this.service.postRegistrarNuevaCita(data)
+    .then(data=>{
+
+      console.log(data);
+      this.modalCitaReservada();
+
+    }).catch(error =>{
+      console.log(error);
+    });
   }
 
   async modalCitaReservada(){

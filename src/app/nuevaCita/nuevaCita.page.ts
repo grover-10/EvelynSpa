@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import {Router} from '@angular/router';
+import {Router,NavigationExtras} from '@angular/router';
 
 @Component({
   selector: 'app-nuevaCita',
@@ -22,15 +22,25 @@ export class nuevaCitaPage {
   public lista4 = false;
   public lista5 = false;
   public lista6 = false;
-  
+
+  public listallena1:any = [{nombre:'Tratamiento -60m',idTratamiento:1}];
+  public listallena2:any = [{nombre:'Tratamiento -60m',idTratamiento:1}];
+  public listallena3:any = [{nombre:'Tratamiento -60m',idTratamiento:1}];
+  public listallena4:any = [{nombre:'Tratamiento -60m',idTratamiento:1}];
+  public listallena5:any = [{nombre:'Tratamiento -60m',idTratamiento:1}];
+  public listallena6:any = [{nombre:'Tratamiento -60m',idTratamiento:1}];
+
+
+  public nuevacita:any = {};
+
 
   constructor(private router:Router) {}
 
 
- 
   expandirTratamiento(val){
 
     console.log('HOLA')
+
     switch(val){
 
       case 1:
@@ -98,9 +108,17 @@ export class nuevaCitaPage {
 
   }
 
-  irNuevaCitaHorario(){
+  irNuevaCitaHorario(tratamiento){
     
-    this.router.navigate(['nuevaCitaHorario']);
+    this.nuevacita.tratamiento = tratamiento;
+    console.log(this.nuevacita);
+
+    let navigationExtras: NavigationExtras = {
+      state: {
+        nuevaCita: this.nuevacita
+      }
+    };    
+    this.router.navigate(['nuevaCitaHorario'],navigationExtras);
   }
 
 }

@@ -83,42 +83,12 @@
 
       <ion-row class="checkbox-tags rounded-checkbox-tags">
 
-        <ion-item lines="none" class="checkbox-tag rounded-tag" >
+        <ion-item lines="none" class="checkbox-tag rounded-tag" *ngFor="let hora of horascita" >
           <div class="div-border">
-            <ion-label class="tag-label">9:00</ion-label>
-            <ion-checkbox></ion-checkbox>
+            <ion-label class="tag-label">{{hora.hora}}</ion-label>
+            <ion-checkbox [disabled] = "!hora.estaDisponible" (ionChange) = "getHourSelected()" [(ngModel)] = "hora.seleccionada"></ion-checkbox>
           </div>
         </ion-item>
-        <ion-item lines="none" class="checkbox-tag rounded-tag" >
-          <div class="div-border">
-            <ion-label class="tag-label">10:00</ion-label>
-            <ion-checkbox></ion-checkbox>
-          </div>
-       </ion-item>
-       <ion-item lines="none" class="checkbox-tag rounded-tag" >
-        <div class="div-border">
-          <ion-label class="tag-label">11:00</ion-label>
-          <ion-checkbox></ion-checkbox>
-        </div>
-       </ion-item>
-       <ion-item lines="none" class="checkbox-tag rounded-tag" >
-        <div class="div-border">
-          <ion-label class="tag-label">12:00</ion-label>
-          <ion-checkbox></ion-checkbox>
-        </div>
-      </ion-item>
-      <ion-item lines="none" class="checkbox-tag rounded-tag" >
-        <div class="div-border">
-          <ion-label class="tag-label">14:00</ion-label>
-          <ion-checkbox></ion-checkbox>
-        </div>
-     </ion-item>
-     <ion-item lines="none" class="checkbox-tag rounded-tag" >
-      <div class="div-border">
-        <ion-label class="tag-label">15:00</ion-label>
-        <ion-checkbox></ion-checkbox>
-      </div>
-     </ion-item>
       </ion-row>
 
       <ion-row style="margin-top: 10px;">
@@ -153,15 +123,15 @@
 
       <ion-row>
         <div style="width: 100%; margin-left: 4%;">
-          <ion-radio-group value="Local">
+          <ion-radio-group [(ngModel)] = "modalidad">
             <ion-row>
               <ion-item class="item-radio-group" lines="none">
                 <ion-label class="item-label">Local</ion-label>
-                <ion-radio slot="start" value="Local"></ion-radio>
+                <ion-radio slot="start" value="1"></ion-radio>
               </ion-item>
               <ion-item class="item-radio-group" lines="none">
                 <ion-label class="item-label">Domicilio</ion-label>
-                <ion-radio slot="start" value="Domicilio"></ion-radio>
+                <ion-radio slot="start" value="2"></ion-radio>
               </ion-item>
             </ion-row>
           </ion-radio-group>

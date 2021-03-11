@@ -42,19 +42,19 @@
             <ion-list *ngIf = "lista1" class="list-detalle ">
               <ion-item class="item-list" lines = "none" (click) = "irNuevaCitaHorario();" >
                 <ion-icon slot="start" src= "../../assets/nuevaCitaDetalle/flor.svg" ></ion-icon>
-                <ion-label class="label-list">Depilación de piernas - 60 min.</ion-label>
+                <ion-label class="label-list"> {{nuevaCita.tratamiento.nombretratamiento}} </ion-label>
               </ion-item>
               <ion-item class="item-list" lines = "none" (click) = "irNuevaCitaHorario();" >
                 <ion-icon slot="start" src= "../../assets/nuevaCitaDetalle/reloj.svg" ></ion-icon>
-                <ion-label class="label-list">27 Enero, 2020. 11:00am</ion-label>
+                <ion-label class="label-list">{{nuevaCita.fecha}} {{nuevaCita.hora}} </ion-label>
               </ion-item>
               <ion-item class="item-list" lines = "none" (click) = "irNuevaCitaHorario();" >
                 <ion-icon slot="start" src= "../../assets/nuevaCitaDetalle/gps.svg" ></ion-icon>
-                <ion-label class="label-list">Manzana C Lote 10 Covicorti, Trujillo</ion-label>
+                <ion-label class="label-list">{{nuevaCita.ubicacion.direccion}}</ion-label>
               </ion-item>
               <ion-item class="item-list" lines = "none" (click) = "irNuevaCitaHorario();" >
                 <ion-icon slot="start" src= "../../assets/nuevaCitaDetalle/maleta.svg" ></ion-icon>
-                <ion-label class="label-list">Local</ion-label>
+                <ion-label class="label-list"> {{(nuevaCita.modalidad == "1") ? 'Local':'Domicilio'}} </ion-label>
               </ion-item>
               <ion-item class="item-list" lines = "none" (click) = "irNuevaCitaHorario();" >
                 <ion-icon slot="start" src= "../../assets/nuevaCitaDetalle/face.svg" ></ion-icon>
@@ -72,15 +72,15 @@
             <ion-list *ngIf = "lista2" class="list-detalle">
               <ion-item class="item-list" lines = "none" (click) = "irNuevaCitaHorario();">
                 <ion-icon slot="start" src= "../../assets/nuevaCitaDetalle/nota.svg" ></ion-icon>
-                <ion-label class="label-list">Laura Lopez Flores</ion-label>
+                <ion-label class="label-list">{{nuevaCita.usuario.nombres}} {{nuevaCita.usuario.apellidos}}</ion-label>
               </ion-item>
               <ion-item class="item-list" lines = "none" (click) = "irNuevaCitaHorario();">
                 <ion-icon slot="start" src= "../../assets/nuevaCitaDetalle/phone.svg" ></ion-icon>
-                <ion-label class="label-list">999999999</ion-label>
+                <ion-label class="label-list">{{nuevaCita.usuario.celular}}</ion-label>
               </ion-item>
               <ion-item class="item-list" lines = "none" (click) = "irNuevaCitaHorario();">
                 <ion-icon slot="start" src= "../../assets/nuevaCitaDetalle/carta.svg" ></ion-icon>
-                <ion-label class="label-list">laura01@gmail.com</ion-label>
+                <ion-label class="label-list">{{nuevaCita.usuario.email}}</ion-label>
               </ion-item>
           </ion-list>
       

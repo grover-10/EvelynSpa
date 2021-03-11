@@ -7,7 +7,7 @@ import { DomController } from '@ionic/angular';
 export class HideHeaderDirective {
 
   @Input('appHideHeader') toolbar: any;
-  private toolbarHeight = 44;
+  private toolbarHeight = 34;
 
   constructor(private renderer: Renderer2, private domCtrl: DomController) { 
   }
@@ -25,7 +25,6 @@ export class HideHeaderDirective {
    const scroolTop = $event.detail.scrollTop;
    let newPosition = - (scroolTop / 5);
 
-   console.log(scroolTop);
    if(newPosition < -this.toolbarHeight){
      newPosition = - this.toolbarHeight;
    }

@@ -48,4 +48,18 @@ export class ServiceService {
       });
     });
   }
+
+  // REGISTRAR NUEVA CITA
+  postRegistrarNuevaCita(data){
+    return new Promise((resolve, reject) => {
+      this.http.post(this.url2+'/cita/registrar',data,this.options)
+      .subscribe(Response => {
+        resolve(Response);
+      }, (error) => {
+        reject(error);
+      });
+    });
+  }
+
+
 }

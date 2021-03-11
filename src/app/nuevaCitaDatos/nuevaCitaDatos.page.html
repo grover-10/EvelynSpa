@@ -104,16 +104,21 @@
           <ion-label class="label-input">Dirección</ion-label>
       </ion-row>
       <ion-row>
-          <div style="width: 100%; text-align: center; align-content: center;">
-              <ion-item class="input-item" lines="none">
-                  <ion-input formControlName="direccion" type="text" class="input-text" placeholder="Tu dirección"></ion-input>
-                </ion-item>
+          <div style="width: 100%; text-align: left; align-content: center;">
+            <ion-searchbar formControlName="direccion" class="searchbar-input" placeholder="Tu dirección" (ionChange)="UpdateSearchResults($event.detail.value)"></ion-searchbar>
+            <ion-list [hidden]="autocompleteItems.length == 0" class="ion-list">
+              <ion-item *ngFor="let item of autocompleteItems" tappable lines = "none" (click)="SelectSearchResult(item)">
+                {{ item.description }}
+              </ion-item>
+            </ion-list>   
           </div>
           <div style="width: 100%; margin-bottom: 5px;">
               <span class="error ion-padding error-input" *ngIf="submitted && errorControl.direccion.errors?.required">
                   <ion-label class="label-error">direccion es requerida.</ion-label>
                 </span>
           </div>
+
+
   
       </ion-row>
         

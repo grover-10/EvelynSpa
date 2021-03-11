@@ -1,8 +1,13 @@
-import { Component, OnInit } from '@angular/core';
-import {Router} from '@angular/router'
+import { Component, OnInit, NgZone } from '@angular/core';
+import {Router,ActivatedRoute,NavigationExtras } from '@angular/router'
 import { FormGroup, FormBuilder, Validators } from "@angular/forms";
 import { from } from 'rxjs';
+import { Geolocation } from '@ionic-native/geolocation/ngx';
+import { NativeGeocoder, NativeGeocoderResult, NativeGeocoderOptions } from '@ionic-native/native-geocoder/ngx';
+import { Plugins } from '@capacitor/core';
+const { Storage } = Plugins;
 
+declare var google;
 
 @Component({
   selector: 'app-nuevaCitaDatos',
@@ -14,8 +19,31 @@ export class nuevaCitaDatosPage implements OnInit{
 
   myForm: FormGroup;
   submitted = false;
+  public nuevaCita;
+  public GoogleAutocomplete: any;
+  public autocomplete: { input: string; };
+  public autocompleteItems: any[];
+  public geocoder:any;
+  public ubicacion:any = {};
+  public paciente:any = {idPaciente:0}
+  private idUsuario;
+  constructor( 
+    public formBuilder: FormBuilder,
+    public router: Router,
+    private route:ActivatedRoute,
+    public zone: NgZone){
+    
+    this.GoogleAutocomplete = new google.maps.places.AutocompleteService();
+    this.geocoder = new google.maps.Geocoder();
+    this.autocomplete = { input: '' };
+    this.autocompleteItems = [];
 
-  constructor( public formBuilder: FormBuilder, public router: Router){}
+    this.route.queryParams.subscribe(params => {
+      if (this.router.getCurrentNavigation().extras.state) {
+          this.nuevaCita = this.router.getCurrentNavigation().extras.state.nuevaCita;
+      }
+    });
+  }
 
 
 
@@ -27,12 +55,73 @@ ngOnInit(){
     email: ['', [Validators.required, Validators.pattern('[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,3}$')]],
     direccion: ['', [Validators.required]]
     
-  })
+  });
+ 
+  this.getDatos();
+}
+
+async getDatos(){
+  const ret = await Storage.get({ key: 'idusuario' });
+  const user = JSON.parse(ret.value);
+  this.idUsuario = user.idusuario;
+  this.myForm.setValue({
+    nombres: user.nombres,
+    apellidos: user.apellidos,
+    celular: user.celular,
+    email: user.correo,
+    direccion: ''
+  });
+ 
  
 }
 
 get errorControl() {
   return this.myForm.controls;
+}
+
+SelectSearchResult(item) {
+    console.log(item);
+
+    this.myForm.setValue({
+      nombres: this.myForm.value.nombres,
+      apellidos: this.myForm.value.apellidos,
+      celular: this.myForm.value.celular,
+      email: this.myForm.value.email,
+      direccion: item.description
+    });
+  
+    this.ClearAutocomplete();
+    this.geocoder.geocode({'address':item.description}, (results, status) =>{
+  
+      this.ubicacion.direccion = item.description;
+      this.ubicacion.lat = results[0].geometry.location.lat();
+      this.ubicacion.lng = results[0].geometry.location.lng();
+  
+    });
+
+}
+
+ClearAutocomplete(){
+  this.autocompleteItems = []
+  this.autocomplete.input = ''
+}
+
+UpdateSearchResults(event){
+
+  this.autocomplete.input = event;
+  if (this.autocomplete.input == '') {
+    this.autocompleteItems = [];
+    return;
+  }
+  this.GoogleAutocomplete.getPlacePredictions({ input: this.autocomplete.input },
+  (predictions, status) => {
+    this.autocompleteItems = [];
+    this.zone.run(() => {
+      predictions.forEach((prediction) => {
+        this.autocompleteItems.push(prediction);
+      });
+    });
+  });
 }
 
 onSubmit() {
@@ -41,10 +130,23 @@ onSubmit() {
      console.log('Llena todos los datos!')
     return false;
   } else {
-    console.log(this.myForm.value)
-    this.router.navigate(['nuevaCitaDetalle']);
 
+    this.nuevaCita.usuario = this.myForm.value;
+    this.nuevaCita.usuario.idusuario = this.idUsuario;
+    this.nuevaCita.ubicacion = this.ubicacion;
+    this.nuevaCita.cantidadpersonas = 1;
+    this.nuevaCita.paciente = this.paciente;
+    this.nuevaCita.estado = 1;
 
+    console.log(this.nuevaCita)
+
+    let navigationExtras: NavigationExtras = {
+      state: {
+        nuevaCita: this.nuevaCita
+      }
+    };    
+    
+    this.router.navigate(['nuevaCitaDetalle'],navigationExtras);
   }
 }
 }
