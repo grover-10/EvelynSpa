@@ -42,17 +42,21 @@
   <ion-row>
     <ion-card class="card-items-perfil">
 
-      <ion-item class="item-menu" lines = "none" (click) = "expandirTratamiento(1);">
-        <ion-label class="label-menu">Tratamiento facial - 60m.</ion-label>
-        <ion-icon style="color: #708070;" [name]="icon1"  slot="end"></ion-icon>
-      </ion-item>
-
-          <ion-list *ngIf = "lista1"  class="list-tratamiento">
-            <ion-item class="item-list" *ngFor="let tratamiento of listallena1" lines = "none" (click) = "irNuevaCitaHorario(tratamiento);" >
-              <ion-label class="label-list">{{tratamiento.nombre}}</ion-label>
-            </ion-item>
-          </ion-list>
-    
+      <div  *ngFor = "let tipo of tiposTratamientos">
+        <ion-item class="item-menu" lines = "none" (click) = "expandir(tipo);" >
+          <ion-label class="label-menu">{{tipo.nombre}}</ion-label>
+          <ion-icon style="color: #708070;" [name]="tipo.icono"  slot="end"></ion-icon>
+        </ion-item>
+  
+            <ion-list *ngIf = "tipo.seleccionado"  class="list-tratamiento">
+              <ion-item class="item-list" *ngFor="let t of tipo.tratamiento" lines = "none" (click) = "irNuevaCitaHorario(t);" >
+                <ion-label class="label-list" slot="start">{{t.nombre}} </ion-label>
+                <ion-note  slot="end" class="label-tiempo">{{t.duracion}}min </ion-note>
+              </ion-item>
+            </ion-list>
+      </div>
+      
+    <!--
       <ion-item class="item-menu" lines = "none" (click) = "expandirTratamiento(2);">
         <ion-label class="label-menu">Embellecimiento facial - 60m.</ion-label>
         <ion-icon style="color: #708070;" [name]="icon2" slot="end"></ion-icon>
@@ -110,8 +114,9 @@
             <ion-item class="item-list" *ngFor="let tratamiento of listallena6" lines = "none" (click) = "irNuevaCitaHorario(tratamiento);">
             <ion-label class="label-list">{{tratamiento.nombre}}</ion-label>
             </ion-item>
+           
         </ion-list>
-    
+     -->
     </ion-card>
   </ion-row>
    

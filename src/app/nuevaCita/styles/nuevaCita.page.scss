@@ -155,9 +155,18 @@ ion-content {
                     font-style: normal;
                     font-weight: normal;
                     font-size: 16px;
+                    width: 80%;
+                    position: absolute;
+                 
                     line-height: 19px;
                     color: #515252;
+
+                   
                 }
+                .label-tiempo{
+                    width: auto;
+                  
+                } 
             }
         }
     }

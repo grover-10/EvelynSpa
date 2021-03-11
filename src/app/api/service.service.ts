@@ -61,5 +61,14 @@ export class ServiceService {
     });
   }
 
+  //LISTAR TRATAMIENTOS
+  listarTratamientos(){
+    return this.http.get(this.url2+"/tratamiento/listar/"+1,this.options);
+  }
+
+  //LISTAR TIPOS TRATAMIENTOS
+  listarTiposTratamientos(){
+    return this.http.get(this.url2+"/tipotratamiento/listar/"+1,this.options);
+  }
 
 }
