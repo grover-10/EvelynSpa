@@ -173,6 +173,26 @@ ion-content {
 
 
 }
+.ion-list{
+    margin: auto;
+    border-radius: 8px !important;
+    background-color: #ffffff !important;
+    width: 75%;
+    position: absolute;
+    z-index: 2;
+    border: 1px solid rgb(129, 129, 129);
+    margin-left: 10%;
+    margin-top: -5px;
+  
+  
+    ion-item{
+      color: var(--ion-color-dark);
+      color: #121212!important;
+      --background: #ffffff;
+      font-size: 0.9rem;
+      margin-right: 10px;
+    }
+  }
 
 ion-header{
 

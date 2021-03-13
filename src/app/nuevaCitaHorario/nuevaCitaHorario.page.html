@@ -85,8 +85,8 @@
 
         <ion-item lines="none" class="checkbox-tag rounded-tag" *ngFor="let hora of horascita" >
           <div class="div-border">
-            <ion-label class="tag-label">{{hora.hora}}</ion-label>
-            <ion-checkbox [disabled] = "!hora.estaDisponible" (ionChange) = "getHourSelected()" [(ngModel)] = "hora.seleccionada"></ion-checkbox>
+            <ion-label class="tag-label">{{convert(hora.hora)}}</ion-label>
+            <ion-checkbox [disabled] = "!hora.estaDisponible" (click) = "getHourSelected(hora)" [(ngModel)] = "hora.seleccionada"></ion-checkbox>
           </div>
         </ion-item>
       </ion-row>

@@ -42,11 +42,11 @@
             <ion-list *ngIf = "lista1" class="list-detalle ">
               <ion-item class="item-list" lines = "none" (click) = "irNuevaCitaHorario();" >
                 <ion-icon slot="start" src= "../../assets/nuevaCitaDetalle/flor.svg" ></ion-icon>
-                <ion-label class="label-list"> {{nuevaCita.tratamiento.nombretratamiento}} </ion-label>
+                <ion-label class="label-list"> {{nuevaCita.tratamiento.nombre}} </ion-label>
               </ion-item>
               <ion-item class="item-list" lines = "none" (click) = "irNuevaCitaHorario();" >
                 <ion-icon slot="start" src= "../../assets/nuevaCitaDetalle/reloj.svg" ></ion-icon>
-                <ion-label class="label-list">{{nuevaCita.fecha}} {{nuevaCita.hora}} </ion-label>
+                <ion-label class="label-list">{{nuevaCita.fecha}} {{nuevaCita.horario.hora}} </ion-label>
               </ion-item>
               <ion-item class="item-list" lines = "none" (click) = "irNuevaCitaHorario();" >
                 <ion-icon slot="start" src= "../../assets/nuevaCitaDetalle/gps.svg" ></ion-icon>

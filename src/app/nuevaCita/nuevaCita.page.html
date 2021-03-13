@@ -33,9 +33,14 @@
   </ion-row>
   <ion-row>
     <div style="width: 100%;">
-            <ion-searchbar class="searchbar-input" placeholder="Ej:Depilación de piernas"></ion-searchbar>    
+            <ion-searchbar class="searchbar-input" placeholder="Ej:Depilación de piernas" (ionChange)="buscarTratamiento($event)"></ion-searchbar>    
     </div>
   </ion-row>
+  <ion-list [hidden]="ocultarlista == true" class="ion-list">
+    <ion-item *ngFor="let item of tratamientos" tappable (click)="irNuevaCitaHorario(item)">
+      {{ item.nombre }}
+    </ion-item>
+  </ion-list>
   <ion-row>
     <ion-label class="label-input">Seleccionar</ion-label>
   </ion-row>

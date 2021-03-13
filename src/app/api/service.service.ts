@@ -52,7 +52,7 @@ export class ServiceService {
   // REGISTRAR NUEVA CITA
   postRegistrarNuevaCita(data){
     return new Promise((resolve, reject) => {
-      this.http.post(this.url2+'/cita/registrar',data,this.options)
+      this.http.post(this.url+'/cita/registrar',data,this.options)
       .subscribe(Response => {
         resolve(Response);
       }, (error) => {
@@ -61,14 +61,36 @@ export class ServiceService {
     });
   }
 
+    // DISPONIBILIDAD  CITA
+    postDisponibilidadCita(data){
+      return new Promise((resolve, reject) => {
+        this.http.post(this.url+'/cita/disponibilidad',data,this.options)
+        .subscribe(Response => {
+          resolve(Response);
+        }, (error) => {
+          reject(error);
+        });
+      });
+    }
+
+  //LISTAR HORARIOS
+  getListarHorarios(){
+    return this.http.get(this.url+"/cita/horarios",this.options);
+  }    
+
   //LISTAR TRATAMIENTOS
   listarTratamientos(){
-    return this.http.get(this.url2+"/tratamiento/listar/"+1,this.options);
+    return this.http.get(this.url+"/tratamiento/listar/"+1,this.options);
   }
 
   //LISTAR TIPOS TRATAMIENTOS
   listarTiposTratamientos(){
-    return this.http.get(this.url2+"/tipotratamiento/listar/"+1,this.options);
+    return this.http.get(this.url+"/tipotratamiento/listar/"+1,this.options);
+  }
+
+  //BUSCAR TRATAMIENTOS 
+  buscarTratamiento(val){
+    return this.http.get(this.url+"/tratamiento/buscar/"+val,this.options);
   }
 
 }

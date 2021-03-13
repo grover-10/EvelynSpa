@@ -17,7 +17,7 @@ export class nuevaCitaPage implements OnInit {
   public icon6 =  'chevron-down-outline';
   tratamientos:any;
   tiposTratamientos:any;
-
+  ocultarlista = true;
   public lista1 = false;
   public lista2 = false;
   public lista3 = false;
@@ -45,7 +45,7 @@ export class nuevaCitaPage implements OnInit {
     ngOnInit(){
     
       this.listarTiposTratamientos();
-      this.listarTratamientos();
+      //this.listarTratamientos();
       
     }
 
@@ -98,6 +98,34 @@ export class nuevaCitaPage implements OnInit {
       }
     };    
     this.router.navigate(['nuevaCitaHorario'],navigationExtras);
+  }
+
+
+  buscarTratamiento(evento){
+    console.log(evento.detail.value);
+    let valor = evento.detail.value;
+    if(valor == ""){
+      this.ocultarlista = true;
+    }else{
+      this.apiServicio.buscarTratamiento(valor)
+      .subscribe((data) =>{
+
+        if(data == null){
+          this.tratamientos = [{"nombre":"Sin resultados"}];
+          this.ocultarlista = false;
+        }else{
+          this.tratamientos = data;
+          this.ocultarlista = false;
+        }
+        
+
+        console.log(this.tratamientos);
+      },(er)=>{
+        console.log(er);
+      });
+    }
+
+   
   }
 
 }

@@ -5,6 +5,8 @@ import { Component, ViewChild, OnInit, Inject, LOCALE_ID } from '@angular/core';
 import { formatDate } from '@angular/common';
 import { AlertController, ModalController } from '@ionic/angular';
 import { Router, ActivatedRoute,NavigationExtras } from '@angular/router';
+import { ServiceService } from '../api/service.service';
+import * as moment from 'moment';
 
 @Component({
   selector: 'app-nuevaCitaHorario',
@@ -17,18 +19,11 @@ export class nuevaCitaHorarioPage{
   eventSource = [];
   viewTitle: string;
 
-  public horascita:any = [{"hora":"9:00", "estaDisponible":true, "seleccionada":false},
-                          {"hora":"10:00", "estaDisponible":true,"seleccionada":false},
-                          {"hora":"11:00", "estaDisponible":true,"seleccionada":false},
-                          {"hora":"12:00", "estaDisponible":false,"seleccionada":false},
-                          {"hora":"14:00", "estaDisponible":true,"seleccionada":false},
-                          {"hora":"15:00", "estaDisponible":true,"seleccionada":false},
-                          {"hora":"16:00", "estaDisponible":true,"seleccionada":false},
-                          {"hora":"17:00", "estaDisponible":true,"seleccionada":false},];
+  public horascita:any;
   public fecha;                        
-  public hora;
+  public horario;
   public modalidad = "1";
-  public nuevaCita;
+  public nuevaCita:any = {};
   
   @ViewChild(CalendarComponent) myCal: CalendarComponent;
 
@@ -40,6 +35,7 @@ export class nuevaCitaHorarioPage{
   constructor(
     private alertCtrl: AlertController,
     private router:Router,
+    private service:ServiceService,
     private route:ActivatedRoute,
     @Inject(LOCALE_ID) private locale: string,
     private modalCtrl: ModalController
@@ -87,20 +83,56 @@ export class nuevaCitaHorarioPage{
     const time = this.dateAsYYYYMMDDHHNNSS(ev);
     console.log(time);
     this.fecha = String(time);
-
-
+    this.getHorarios();
 };
 
-getHourSelected(){
+getDisponibilidadCita(fecha){
+   let cita = {fecha:fecha};
+   console.log(cita);
+   this.service.postDisponibilidadCita(cita)
+   .then(data=>{
 
-  let hora = this.horascita.find(item => item.seleccionada === true);
+      let horasDisponibles:any = data;
+      console.log(data)
+      if(data != null || data != undefined){
+          for(let hora of this.horascita){
+              for(let horaD of horasDisponibles){
+                  if(hora.idhorario === horaD.idhorario){
+                      if(horaD.disponibilidad > 2){
+                          hora.estaDisponible = false;
+                      }
+                  }
+              }
+          }
+      }
+      
+   }).catch(error=>{
+     console.log(error);
+   });
+}
 
-  if(hora != undefined || hora != null)
-      this.hora = hora.hora;
-  else
-      this.hora = '';
+getHorarios(){
+  this.service.getListarHorarios()
+  .subscribe(data=>{
+    this.horascita = data;
+    for(let hora of this.horascita){
+        hora.estaDisponible = true;
+        hora.seleccionada = false;
+    }
+    this.getDisponibilidadCita(this.fecha);
+    
+  },(error)=>{
+    console.log(error);
+  });
+}
 
-  console.log(this.hora);
+getHourSelected(horaSelec){
+      console.log(this.horascita);
+      for(let hora of this.horascita){
+        if(horaSelec.idhorario !== hora.idhorario || hora.seleccionada == true){
+            hora.seleccionada = false;
+        }
+      }
 }
 
 dateAsYYYYMMDDHHNNSS(date): string {
@@ -118,14 +150,20 @@ leftpad(val, resultLength = 2, leftpadChar = '0'): string {
         + String(val)).slice(String(val).length);
 }
 
-llenarDatos(){
-
+ convert(input) {
+  return moment(input, 'HH:mm:ss').format('h:mm A');
 }
 
 irNuevaCitaDatos(){
 
+  for(let hora of this.horascita){
+      if(hora.seleccionada == true)
+          this.horario = hora;
+  }
+
   this.nuevaCita.fecha = this.fecha;
-  this.nuevaCita.hora = this.hora+':00';
+  this.nuevaCita.horario = this.horario;
+  this.nuevaCita.hora = this.horario.hora;
   this.nuevaCita.modalidad = this.modalidad;
 
   console.log(this.nuevaCita);
