@@ -1,7 +1,7 @@
 <ion-header no-shadow no-border class="ion-no-border">
     <ion-toolbar #toolbar>
       <ion-buttons slot="start">
-        <ion-back-button style="content: url('../assets/icon/Arrow - Left 2.svg'); zoom: 0.8;"></ion-back-button>
+        <ion-back-button #backbtn3 style="content: url('../assets/icon/Arrow - Left 2.svg'); zoom: 0.8;"></ion-back-button>
       </ion-buttons>
       <ion-title class="title-page">Agenda tu cita</ion-title>
     </ion-toolbar>
@@ -46,7 +46,7 @@
               </ion-item>
               <ion-item class="item-list" lines = "none" (click) = "irNuevaCitaHorario();" >
                 <ion-icon slot="start" src= "../../assets/nuevaCitaDetalle/reloj.svg" ></ion-icon>
-                <ion-label class="label-list">{{nuevaCita.fecha}} {{nuevaCita.horario.hora}} </ion-label>
+                <ion-label class="label-list">{{nuevaCita.fecha}} {{convert(nuevaCita.horario.hora)}} </ion-label>
               </ion-item>
               <ion-item class="item-list" lines = "none" (click) = "irNuevaCitaHorario();" >
                 <ion-icon slot="start" src= "../../assets/nuevaCitaDetalle/gps.svg" ></ion-icon>

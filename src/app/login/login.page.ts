@@ -1,17 +1,16 @@
-
 import {ModalController} from '@ionic/angular';
 import {Router,NavigationExtras} from '@angular/router';
 import {modalErrorLoginPage} from '../modals/modalErrorLogin/modalErrorLogin.page';
 import { Component, OnInit } from '@angular/core';
 import { FormGroup, FormBuilder, Validators } from "@angular/forms";
 import { ServiceService } from '../api/service.service';
-import { LoadingController } from '@ionic/angular';
+import { LoadingController,Platform } from '@ionic/angular';
 import { AlertController } from '@ionic/angular';
 import { Facebook} from '@ionic-native/facebook/ngx';
 import { Plugins } from '@capacitor/core';
 import { AES256 } from '@ionic-native/aes-256/ngx';
 const { Storage } = Plugins;
-
+const { App } = Plugins;
 export interface Slide {
     title: string;
     description: string;
@@ -33,10 +32,11 @@ export class loginPage implements OnInit{
 
   private secureKey: string = "7666733f9a8ce733904a5b8e61f10f17";
   private secureIV: string = "0b89fb94afe731fe";
-
+  public subscription;
   constructor(private router:Router,
               private modalController:ModalController,
               public formBuilder: FormBuilder,
+              private platform: Platform,
               public service: ServiceService,
               public alertController: AlertController,
               public facebook: Facebook,
@@ -50,9 +50,18 @@ export class loginPage implements OnInit{
       email: ['', [Validators.required, Validators.pattern('[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,3}$')]],
       password: ['', [Validators.required, Validators.minLength(8)]]
     });
- 
 }
 
+  ionViewWillEnter(): void{
+  this.subscription = this.platform.backButton.subscribeWithPriority(9999, () => {
+      App.exitApp();
+   
+  });
+  }
+  // Restore to default when leaving this page
+  ionViewDidLeave(): void {
+    this.subscription.unsubscribe();
+  } 
 
 ///////// RUTAS ///////////////
   irMenu(){

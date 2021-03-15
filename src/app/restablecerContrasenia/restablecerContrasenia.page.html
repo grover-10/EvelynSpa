@@ -1,9 +1,5 @@
 <ion-header no-shadow no-border class="ion-no-border">
-    <ion-toolbar>
-      <ion-buttons slot="start">
-        <ion-back-button style="content: url('../assets/icon/Arrow - Left 2.svg'); zoom: 0.8;"></ion-back-button>
-      </ion-buttons>
-    </ion-toolbar>
+  
   </ion-header>
 
 
@@ -31,7 +27,7 @@
     <ion-row>
     <div style="width: 100%; text-align: center; align-content: center;">
         <ion-item class="input-email" lines="none">
-            <ion-input type="text" class="input-text" placeholder="Ingresa una contraseña"></ion-input>
+            <ion-input type="text" class="input-text" placeholder="Ingresa una contraseña"  [(ngModel)]="clave" ></ion-input>
           </ion-item>
     </div>
 
@@ -39,7 +35,7 @@
 
     <ion-row>
         <div style="width: 100%; align-content: center; text-align: center; padding-top: 80%;">
-            <ion-button class="button-modal-enviar" (click)="guardar()">
+            <ion-button class="button-modal-enviar" (click)="encryptarContrasenia()">
                 <ion-label class="label-button-enviar">Restablecer contraseña</ion-label>
             </ion-button>
         </div>

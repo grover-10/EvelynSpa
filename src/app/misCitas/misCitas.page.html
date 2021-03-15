@@ -21,15 +21,15 @@
     <ion-item class="item-citas" *ngFor = "let cita of listaVisible">
       <div style=" width: 10%; height: 80%;">
         <ion-col>
-          <ion-label class="fecha-item"> {{cita.fecha}} </ion-label>
-          <p class="mes-item">{{cita.mes}}.</p>
+          <ion-label class="fecha-item"> {{convertDay(cita.fecha)}} </ion-label>
+          <p class="mes-item">{{convertMonth(cita.fecha)}}.</p>
         </ion-col>
       </div>
       <div style=" width: 100%; height: 80%;">
         <ion-col>
-          <p class="mod-item">{{cita.modalidad}} </p>
-          <ion-label class="trat-item">{{cita.tratamiento}} </ion-label>
-          <p class="hora-item"><ion-icon src = "../assets/misCitas/schedule_24px.svg"></ion-icon>{{cita.hora}} </p>
+          <p class="mod-item">{{(cita.modalidad == "1") ? 'Local':'Domicilio'}} </p>
+          <ion-label class="trat-item">{{cita.nombre}} </ion-label>
+          <p class="hora-item"><ion-icon src = "../assets/misCitas/schedule_24px.svg"></ion-icon>{{convert(cita.hora)}} </p>
         </ion-col>
       </div>
     </ion-item>

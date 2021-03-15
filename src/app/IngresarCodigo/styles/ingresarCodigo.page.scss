@@ -86,7 +86,7 @@ ion-content {
 }
 .img-login{
     margin: auto;
-    margin-top: 10%;
+    margin-top: 15%;
     max-width: 220px;
     max-height: 220px;
 }
@@ -99,7 +99,7 @@ ion-content {
     width: 86%;
     height: 50px;
    --background: transparent !important;
-   border: 1px solid #BDBDBD;
+   //border: 1px solid #BDBDBD;
    box-sizing: border-box;
    border-radius: 8px !important;
  
@@ -107,10 +107,15 @@ ion-content {
 
 
    .input-text{
-       color: #8F9090;
+       color: #424242;
        font-family: 'Roboto';
        font-style: Regular;
-       font-weight: 400;
+       font-size: 18px;
+       font-weight: bold;
+       margin-left: 10px;
+       margin-right: 10px;
+       text-align: center;
+       border-bottom: 1px solid #515252;
    }
 }
 

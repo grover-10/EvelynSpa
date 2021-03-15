@@ -1,4 +1,8 @@
 import { Component } from '@angular/core';
+import { ServiceService } from '../api/service.service';
+import { AlertController, Platform ,NavController} from '@ionic/angular';
+import * as moment from 'moment';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-misCitas',
@@ -13,24 +17,67 @@ export class misCitasPage {
 
   listaVisible:any;
   opcionSeleccionada = "1";
-
-  constructor() {}
+  public subscription;
+  constructor(private service:ServiceService,
+    private router:Router,
+    private platform: Platform) {}
 
   ionViewWillEnter(): void{
-
-    this.listaVisible = this.listaProxCitas;
-
+   this.getProximasCitas(1);
+   this.subscription = this.platform.backButton.subscribeWithPriority(9999, () => {
+    this.router.navigate(['tabs/inicio']);
+   
+  });
   }
+
+  // Restore to default when leaving this page
+  ionViewDidLeave(): void {
+    this.subscription.unsubscribe();
+  } 
 
   cambiarListaCitas(event){
 
     if(event.detail.value == "1"){
-      this.listaVisible = this.listaProxCitas;
+      this.listaVisible  = [];
+      this.getProximasCitas(1);
     }else{
       if(event.detail.value == "2"){
-        this.listaVisible = this.historial;
+        this.listaVisible  = [];
+        this.getHistorialCitas(1);
       }
     }
+  }
+
+  convert(input) {
+    return moment(input, 'HH:mm:ss').format('h:mm A');
+  }
+
+  convertMonth(input) {
+    return moment(input, 'YYYY-MM-DD').format('MMM');
+  }
+
+  convertDay(input) {
+    return moment(input, 'YYYY-MM-DD').format('DD');
+  }
+
+  getProximasCitas(data){
+      this.service.getListarProximasCitas(data)
+      .subscribe(data=>{
+            this.listaVisible = data;
+            console.log(data);
+      },(error)=>{
+          console.log(error)
+      });
+  }
+
+  getHistorialCitas(data){
+    this.service.getListarHistorialCitas(data)
+    .subscribe(data=>{
+      this.listaVisible = data;
+          console.log(data);
+    },(error)=>{
+        console.log(error)
+    });
   }
 
 }

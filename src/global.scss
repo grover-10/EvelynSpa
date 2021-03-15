@@ -61,14 +61,27 @@ ion-infinite-scroll {
 
 .my-custom-class {
   --background: #ffffff;
-  --spinner-color: #8F9090;;
+  --spinner-color: #8F9090;
 
     color: #515252;
     font-family: 'Roboto';
     font-style: Medium;
     font-weight: normal;
 
+    .alert-title.sc-ion-alert-md, .alert-title.sc-ion-alert-ios {
+      color: #8F9090;
+  }   
+
+    .alert-message.sc-ion-alert-md, .alert-message.sc-ion-alert-ios {
+      color: #8F9090;
+  }
+
+  .alert-button.sc-ion-alert-md, .alert-button.sc-ion-alert-ios {
+      color: #8F9090;
+  }
+
 }
+
 
 //////// CALENDAR STYLES
 

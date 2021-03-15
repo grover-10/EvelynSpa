@@ -1,9 +1,7 @@
 import { Component, OnInit, NgZone } from '@angular/core';
 import {Router,ActivatedRoute,NavigationExtras } from '@angular/router'
 import { FormGroup, FormBuilder, Validators } from "@angular/forms";
-import { from } from 'rxjs';
-import { Geolocation } from '@ionic-native/geolocation/ngx';
-import { NativeGeocoder, NativeGeocoderResult, NativeGeocoderOptions } from '@ionic-native/native-geocoder/ngx';
+import { Platform,NavController } from '@ionic/angular';
 import { Plugins } from '@capacitor/core';
 const { Storage } = Plugins;
 
@@ -27,9 +25,14 @@ export class nuevaCitaDatosPage implements OnInit{
   public ubicacion:any = {};
   public paciente:any = {idPaciente:0}
   private idUsuario;
+  public subscription;
+
+
   constructor( 
     public formBuilder: FormBuilder,
     public router: Router,
+    private platform: Platform,
+    private navCtrl: NavController,
     private route:ActivatedRoute,
     public zone: NgZone){
     
@@ -59,6 +62,19 @@ ngOnInit(){
  
   this.getDatos();
 }
+
+ionViewWillEnter(): void{
+   
+  this.subscription = this.platform.backButton.subscribeWithPriority(9999, () => {
+    this.navCtrl.pop();
+ });
+ }
+
+  // Restore to default when leaving this page
+  ionViewDidLeave(): void {
+    this.subscription.unsubscribe();
+  } 
+
 
 async getDatos(){
   const ret = await Storage.get({ key: 'idusuario' });

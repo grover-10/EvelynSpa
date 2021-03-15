@@ -3,7 +3,7 @@
 import { CalendarComponent } from 'ionic2-calendar';
 import { Component, ViewChild, OnInit, Inject, LOCALE_ID } from '@angular/core';
 import { formatDate } from '@angular/common';
-import { AlertController, ModalController } from '@ionic/angular';
+import { AlertController, ModalController,Platform,NavController} from '@ionic/angular';
 import { Router, ActivatedRoute,NavigationExtras } from '@angular/router';
 import { ServiceService } from '../api/service.service';
 import * as moment from 'moment';
@@ -24,9 +24,11 @@ export class nuevaCitaHorarioPage{
   public horario;
   public modalidad = "1";
   public nuevaCita:any = {};
-  
+  public botonContinuar = true;
+  public dateNow;
+  public timeNow;  
   @ViewChild(CalendarComponent) myCal: CalendarComponent;
-
+  public subscription;
   calendar = {
     mode: 'month',
     currentDate: new Date(),
@@ -35,6 +37,9 @@ export class nuevaCitaHorarioPage{
   constructor(
     private alertCtrl: AlertController,
     private router:Router,
+    private navCtrl: NavController,
+    private platform: Platform,
+    private alertController:AlertController,
     private service:ServiceService,
     private route:ActivatedRoute,
     @Inject(LOCALE_ID) private locale: string,
@@ -47,8 +52,21 @@ export class nuevaCitaHorarioPage{
       }
     });
 
-
+    this.getDateNow();
+    this.getTimeNow();
   }
+
+  ionViewWillEnter(): void{
+   
+    this.subscription = this.platform.backButton.subscribeWithPriority(9999, () => {
+      this.navCtrl.pop();
+   });
+   }
+   
+     // Restore to default when leaving this page
+  ionViewDidLeave(): void {
+    this.subscription.unsubscribe();
+  } 
 
     // Selected date reange and hence title changed
     onViewTitleChanged(title) {
@@ -80,11 +98,54 @@ export class nuevaCitaHorarioPage{
   }
 
   onCurrentDateChanged = (ev: Date) => {
+   
     const time = this.dateAsYYYYMMDDHHNNSS(ev);
-    console.log(time);
-    this.fecha = String(time);
-    this.getHorarios();
+    if(Date.parse(time) < Date.parse(this.dateNow)){
+      this.AlertFechaPasada();
+      this.calendar = {
+        mode: 'month',
+        currentDate: new Date(),
+      };
+    }else{
+      console.log(time);
+      this.fecha = String(time);
+      this.getHorarios();
+    }
+        
+
 };
+
+getDateNow(){
+  var today = new Date();
+  this.dateNow = this.dateAsYYYYMMDDHHNNSS(today);
+  console.log(this.dateNow);
+}
+
+getTimeNow(){
+  var today = new Date();
+  this.timeNow = this.dateAsHHNNSS(today);
+  console.log(this.timeNow);
+}
+
+excluirHorasPasadas(){
+  for(let hora of this.horascita){
+          hora.estaDisponible = this.compareTime(this.timeNow,hora.hora);
+
+  }
+  this.getCitasDiaUsuario();
+}
+compareTime(time1,time2):Boolean{
+
+	var jdt1=Date.parse(this.dateNow+' '+time1);
+	var jdt2=Date.parse(this.fecha+' '+time2);
+  if (jdt1>jdt2)
+  {
+      return false;
+  }else{
+      return true;
+  }
+
+}
 
 getDisponibilidadCita(fecha){
    let cita = {fecha:fecha};
@@ -93,7 +154,6 @@ getDisponibilidadCita(fecha){
    .then(data=>{
 
       let horasDisponibles:any = data;
-      console.log(data)
       if(data != null || data != undefined){
           for(let hora of this.horascita){
               for(let horaD of horasDisponibles){
@@ -105,16 +165,40 @@ getDisponibilidadCita(fecha){
               }
           }
       }
+      this.excluirHorasPasadas();
       
    }).catch(error=>{
      console.log(error);
    });
 }
 
+getCitasDiaUsuario(){
+  let cita = {fecha:this.fecha,usuario:{idusuario:1}};
+  this.service.postCitasDia(cita)
+  .then(data=>{
+    ///// NO SE PERMITE QUE REGISTRE UNA CITA EN LA MISMA HORA Y MISMO DIA
+      console.log(data);
+      if(data != null || data != undefined){
+        let citas:any = data;
+
+          for(let cita of this.horascita){
+                for(let cita2 of citas){
+                    if(cita.hora === cita2.hora){
+                        cita.estaDisponible = false;
+                    }
+                }
+          }
+      }
+  }).catch(error=>{
+    console.log(error);
+  });
+}
+
 getHorarios(){
   this.service.getListarHorarios()
   .subscribe(data=>{
     this.horascita = data;
+    console.log(data);
     for(let hora of this.horascita){
         hora.estaDisponible = true;
         hora.seleccionada = false;
@@ -128,6 +212,7 @@ getHorarios(){
 
 getHourSelected(horaSelec){
       console.log(this.horascita);
+      this.botonContinuar = false;
       for(let hora of this.horascita){
         if(horaSelec.idhorario !== hora.idhorario || hora.seleccionada == true){
             hora.seleccionada = false;
@@ -143,6 +228,12 @@ dateAsYYYYMMDDHHNNSS(date): string {
             + ':' + this.leftpad(date.getMinutes(), 2)
             + ':' + this.leftpad(date.getSeconds(), 2);
             */
+}
+
+dateAsHHNNSS(date): string {
+  return  this.leftpad(date.getHours(), 2)
+            + ':' + this.leftpad(date.getMinutes(), 2)
+            + ':' + this.leftpad(date.getSeconds(), 2);
 }
 
 leftpad(val, resultLength = 2, leftpadChar = '0'): string {
@@ -174,6 +265,19 @@ irNuevaCitaDatos(){
   };    
 
   this.router.navigate(['nuevaCitaDatos'], navigationExtras);
+}
+
+
+///////// ALERT CONTROLLER
+
+async AlertFechaPasada() {
+  const alert = await this.alertController.create({
+    cssClass: 'my-custom-class',
+    message: '¿Puedes viajar al pasado?',
+    buttons: ['OK']
+  });
+
+  await alert.present();
 }
 
 

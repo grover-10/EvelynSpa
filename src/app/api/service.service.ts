@@ -76,7 +76,27 @@ export class ServiceService {
   //LISTAR HORARIOS
   getListarHorarios(){
     return this.http.get(this.url+"/cita/horarios",this.options);
+  }
+  //LISTAR PROXIMAS CITAS
+  getListarProximasCitas(data){
+    return this.http.get(this.url+"/cita/proxima/"+data,this.options);
+  }          
+  //LISTAR HISTORIAL CITAS
+  getListarHistorialCitas(data){
+    return this.http.get(this.url+"/cita/historial/"+data,this.options);
   }    
+  // CITAS DIA
+  postCitasDia(data){
+      return new Promise((resolve, reject) => {
+        this.http.post(this.url+'/cita/dia',data,this.options)
+        .subscribe(Response => {
+          resolve(Response);
+        }, (error) => {
+          reject(error);
+        });
+      });
+    }
+
 
   //LISTAR TRATAMIENTOS
   listarTratamientos(){
@@ -93,4 +113,32 @@ export class ServiceService {
     return this.http.get(this.url+"/tratamiento/buscar/"+val,this.options);
   }
 
+  //VALIDAR CORREO PARA RECUPERAR CONTRASEÑA
+  validarCorreo(correo){
+    return this.http.get(this.url+"/usuario/validar/correo/"+correo,this.options);
+  }
+
+  // ENVIAR CORREO
+  enviarCorreo(detalle){
+    return new Promise((resolve, reject) =>{
+      this.http.post('https://bube.com.pe/emailBube/api/emailbube/email/enviar',detalle,this.options)
+        .subscribe(Response =>{
+          resolve(Response); 
+        }, (error) =>{
+          reject(error);
+        });
+    });
+  }
+
+  //CAMBIAR CONTRASEÑIA
+  cambiarContrasenia(user){
+    return new Promise((resolve, reject) =>{
+      this.http.post(this.url+"/usuario/cambiar/contrasenia",user,this.options)
+        .subscribe((response) =>{
+          resolve(response);
+        },(error) =>{
+          reject(error);
+        });
+    });
+  }
 }

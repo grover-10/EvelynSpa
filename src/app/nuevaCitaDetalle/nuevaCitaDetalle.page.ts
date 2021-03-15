@@ -1,9 +1,12 @@
 import { Component } from '@angular/core';
 import {Router,ActivatedRoute} from '@angular/router';
-import { ModalController } from '@ionic/angular';
+import { ModalController,NavController } from '@ionic/angular';
 import { data } from 'jquery';
 import { ServiceService } from '../api/service.service';
+import { Platform } from '@ionic/angular';
 import {modalCitaReservadaPage} from '../modals/modalCitaReservada/modalCitaReservada.page';
+import * as moment from 'moment';
+
 @Component({
   selector: 'app-nuevaCitaDetalle',
   templateUrl: 'nuevaCitaDetalle.page.html',
@@ -15,15 +18,15 @@ export class nuevaCitaDetallePage{
   public icon1 =  'chevron-down-outline';
   public icon2 =  'chevron-down-outline';
 
-
-
   public lista1 = false;
   public lista2 = false;
   public nuevaCita;
-  
+  public subscription;
   constructor(private modalController:ModalController,
     public router: Router,  
     public service: ServiceService,
+    private platform: Platform,
+    private navCtrl: NavController,
     private route:ActivatedRoute,){
 
     this.route.queryParams.subscribe(params => {
@@ -32,6 +35,19 @@ export class nuevaCitaDetallePage{
       }
     });
   }
+
+
+  ionViewWillEnter(): void{
+   
+    this.subscription = this.platform.backButton.subscribeWithPriority(9999, () => {
+      this.navCtrl.pop();
+   });
+   }
+
+     // Restore to default when leaving this page
+  ionViewDidLeave(): void {
+    this.subscription.unsubscribe();
+  } 
   
   expandirTratamiento(val){
 
@@ -65,8 +81,11 @@ export class nuevaCitaDetallePage{
 
   registrarCita(){
     console.log(this.nuevaCita);
-    this.postRegistrarCita(this.nuevaCita);
-    
+    this.postRegistrarCita(this.nuevaCita); 
+  }
+
+  convert(input) {
+    return moment(input, 'HH:mm:ss').format('h:mm A');
   }
 
   postRegistrarCita(data){

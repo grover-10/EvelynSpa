@@ -1,13 +1,13 @@
 import { Component, OnInit } from '@angular/core';
 import {Router,NavigationExtras} from '@angular/router';
 import { ServiceService } from '../api/service.service';
-
+import { AlertController, Platform ,NavController} from '@ionic/angular';
 @Component({
   selector: 'app-nuevaCita',
   templateUrl: 'nuevaCita.page.html',
   styleUrls: ['./styles/nuevaCita.page.scss']
 })
-export class nuevaCitaPage implements OnInit {
+export class nuevaCitaPage{
 
   public icon1 =  'chevron-down-outline';
   public icon2 =  'chevron-down-outline';
@@ -34,20 +34,26 @@ export class nuevaCitaPage implements OnInit {
 
 
   public nuevacita:any = {};
-
+  public subscription;
 
   constructor(
     private router:Router,
+    private platform: Platform,
+    private navCtrl: NavController,
     private apiServicio:ServiceService
     ) {}
 
-
-    ngOnInit(){
-    
+    ionViewWillEnter(): void{
       this.listarTiposTratamientos();
-      //this.listarTratamientos();
-      
-    }
+      this.subscription = this.platform.backButton.subscribeWithPriority(9999, () => {
+       this.navCtrl.pop();
+     });
+  }
+
+  // Restore to default when leaving this page
+  ionViewDidLeave(): void {
+    this.subscription.unsubscribe();
+  } 
 
   listarTiposTratamientos(){
     this.apiServicio.listarTiposTratamientos()

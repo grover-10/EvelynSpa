@@ -1,4 +1,5 @@
 import { Component } from '@angular/core';
+import { Router } from '@angular/router';
 import { ModalController } from '@ionic/angular';
 
 
@@ -11,10 +12,11 @@ import { ModalController } from '@ionic/angular';
 export class modalCitaReservadaPage{
 
 
-  constructor(private modalCtrl: ModalController){}
+  constructor(private modalCtrl: ModalController,
+              private router:Router){}
 
   irCitas(){
-    this.modalCtrl.dismiss();
+    this.router.navigate(['tabs/misCitas']);
   }
 
 

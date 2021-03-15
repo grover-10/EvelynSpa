@@ -18,10 +18,22 @@
               </ion-label>
           </div>
     </ion-row>
+    <!--
     <ion-row>
         <div style="width: 100%; text-align: center;">
             <ion-item class="input-login" lines="none">    
-                <ion-input  type="text" class="input-text"></ion-input>
+                <ion-input  type="text" class="input-text"  [(ngModel)]="code" (ionChange)="compararCodigo()"></ion-input>
+              </ion-item>
+        </div>
+    </ion-row>
+    -->
+    <ion-row>
+        <div style="width: 100%; text-align: center;">
+            <ion-item class="input-login" lines="none">    
+                <ion-input #input1 type="text" class="input-text" maxlength="1"  [(ngModel)]="code1" (ionChange)="focusInput1()" ></ion-input>
+                <ion-input #input2 type="text" class="input-text" maxlength="1"  [(ngModel)]="code2" (ionChange)="focusInput2()" ></ion-input>
+                <ion-input #input3 type="text" class="input-text" maxlength="1"  [(ngModel)]="code3" (ionChange)="focusInput3()"></ion-input>
+                <ion-input #input4 type="text" class="input-text" maxlength="1"  [(ngModel)]="code4" (ionChange)="focusInput4()"></ion-input>
               </ion-item>
         </div>
     </ion-row>
@@ -29,7 +41,7 @@
     <ion-row>
         <div style="width: 100%; text-align: center; padding-top: 3%;">
             <ion-label >
-                <h3 class="label-page2">Te hemos enviado un código de seguridad para que cambies tu contraseña. Si no encuentras el correo en tu bandeja  de entrada, revisa la carpeta de Spam o haz clic en <ion-label style="color: black;" (click)="enviarCorreo()">volver a enviar</ion-label></h3>
+                <h3 class="label-page2">Te hemos enviado un código de seguridad para que cambies tu contraseña. Si no encuentras el correo en tu bandeja  de entrada, revisa la carpeta de Spam o haz clic en <ion-label style="color: black;" (click)="enviarCodigo()">volver a enviar</ion-label></h3>
             </ion-label>
         </div>
   </ion-row>
