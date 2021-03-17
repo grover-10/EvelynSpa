@@ -14,9 +14,9 @@ export class modalCitaReservadaPage{
 
   constructor(private modalCtrl: ModalController,
               private router:Router){}
-
+              
   irCitas(){
-    this.router.navigate(['tabs/misCitas']);
+    this.modalCtrl.dismiss();
   }
 
 

@@ -33,6 +33,7 @@ export class loginPage implements OnInit{
   private secureKey: string = "7666733f9a8ce733904a5b8e61f10f17";
   private secureIV: string = "0b89fb94afe731fe";
   public subscription;
+  public recordarContrasenia;
   constructor(private router:Router,
               private modalController:ModalController,
               public formBuilder: FormBuilder,
@@ -48,7 +49,8 @@ export class loginPage implements OnInit{
   ngOnInit(){
     this.myForm = this.formBuilder.group({
       email: ['', [Validators.required, Validators.pattern('[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,3}$')]],
-      password: ['', [Validators.required, Validators.minLength(8)]]
+      password: ['', [Validators.required, Validators.minLength(8)]],
+      recordarContrasenia: [false]
     });
 }
 
@@ -101,6 +103,8 @@ export class loginPage implements OnInit{
 
   validarLogin(login){
     let datosLogin = {correo: login.email, contrasenia: login.password};
+    this.recordarContrasenia = (login.recordarContrasenia == true) ? 1:2;
+    console.log(this.recordarContrasenia);
     this.encryptarContrasenia(datosLogin)
   }
 
@@ -130,6 +134,8 @@ export class loginPage implements OnInit{
       }else{
         
         this.guardarStorage(data);
+        this.guardarSesion(this.recordarContrasenia);
+
         this.dismiss();
         this.router.navigate(['tabs/inicio']);
       }     
@@ -193,6 +199,7 @@ export class loginPage implements OnInit{
 
    ////////////// LOGIN FACEBOOK //////////////////////////
    Entrarfacebook(){
+    this.recordarContrasenia = (this.myForm.value.recordarContrasenia == true) ? 1:2;
 
       this.facebook.login(['public_profile', 'email'])
         .then(res =>{
@@ -255,6 +262,7 @@ export class loginPage implements OnInit{
           }else{
 
             this.guardarStorage(res);
+            this.guardarSesion(this.recordarContrasenia);
             this.router.navigate(['tabs/inicio']);
             
           }
@@ -269,6 +277,14 @@ export class loginPage implements OnInit{
   async guardarStorage(user){
     await Storage.set({key:'idusuario',value:JSON.stringify(user[0])});
   }
+
+  async guardarSesion(sesion){
+    console.log(sesion);
+    await Storage.set({key:'sesion',value: JSON.stringify({
+      indicador: sesion,
+    })});
+  }
+
 
   async alertaErrorConexionFB() {
     const alert = await this.alertController.create({

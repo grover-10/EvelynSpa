@@ -2,7 +2,7 @@ import { Component } from '@angular/core';
 import {ActivatedRoute, Router} from '@angular/router';
 import {modalErrorLoginPage} from '../modals/modalErrorLogin/modalErrorLogin.page'
 import { AES256 } from '@ionic-native/aes-256/ngx';
-import {ModalController,AlertController, LoadingController} from '@ionic/angular';
+import {ModalController,AlertController, LoadingController, Platform, NavController} from '@ionic/angular';
 import { ServiceService } from '../api/service.service';
 export interface Slide {
     title: string;
@@ -22,12 +22,15 @@ clave;
 private secureKey: string = "7666733f9a8ce733904a5b8e61f10f17";
 private secureIV: string = "0b89fb94afe731fe";
 public isLoading = false;
+public subscription;
 
   constructor(
     private router:Router,
     private route:ActivatedRoute,
     private aes256: AES256,
     public loadingController: LoadingController,
+    private platform: Platform,
+    private navCtrl: NavController,
     public alertController: AlertController,
     private apiServicio:ServiceService
     ){
@@ -41,6 +44,17 @@ public isLoading = false;
       });
 
   }
+
+  ionViewWillEnter(): void{
+    this.subscription = this.platform.backButton.subscribeWithPriority(9999, () => {
+      this.presentAlertCancelarRestContr();
+   });
+}
+
+// Restore to default when leaving this page
+ionViewDidLeave(): void {
+  this.subscription.unsubscribe();
+} 
 
   encryptarContrasenia(){
     this.loadingRegistrando();
@@ -97,6 +111,31 @@ public isLoading = false;
         cssClass: 'my-custom-class',
         message: 'Ocurrio un error intentelo de nuevo',
         buttons: ['OK']
+      });
+  
+      await alert.present();
+    }
+
+    async presentAlertCancelarRestContr() {
+      const alert = await this.alertController.create({
+        cssClass: 'my-custom-class',
+        header: 'Cancelar',
+        message: '¿Desea cancelar la restauración?',
+        buttons: [
+          {
+            text: 'No',
+            role: 'cancel',
+            cssClass: 'secondary',
+            handler: (blah) => {
+              console.log('Boton no');
+            }
+          }, {
+            text: 'Si',
+            handler: () => {
+              this.router.navigate(['login']);    
+            }
+          }
+        ]
       });
   
       await alert.present();

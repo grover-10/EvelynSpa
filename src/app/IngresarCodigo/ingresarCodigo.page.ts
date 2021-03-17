@@ -1,5 +1,5 @@
 import { Component, ViewChild } from '@angular/core';
-import {ModalController} from '@ionic/angular';
+import {ModalController, NavController, Platform} from '@ionic/angular';
 import {ActivatedRoute, Router,NavigationExtras} from '@angular/router';
 import {modalErrorLoginPage} from '../modals/modalErrorLogin/modalErrorLogin.page'
 import { AlertController } from '@ionic/angular';
@@ -29,10 +29,13 @@ export class ingresarCodigoPage {
   @ViewChild('input3') input3 : any;
   @ViewChild('input4') input4 : any;
 
+  public subscription;
   constructor(
     private router:Router,
     public alertController: AlertController,
     private route:ActivatedRoute,
+    private platform: Platform,
+    private navCtrl: NavController,
     private apiServicio:ServiceService
     ){
 
@@ -47,9 +50,17 @@ export class ingresarCodigoPage {
 
   }
 
-  ionViewWillEnter(){
+ionViewWillEnter(): void{
     this.focusInput1();
-  }
+    this.subscription = this.platform.backButton.subscribeWithPriority(9999, () => {
+     this.navCtrl.pop();
+   });
+}
+
+// Restore to default when leaving this page
+ionViewDidLeave(): void {
+  this.subscription.unsubscribe();
+} 
   
   compararCodigo(){
     let code = this.code1+this.code2+this.code3+this.code4;

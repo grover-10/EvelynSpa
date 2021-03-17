@@ -3,6 +3,7 @@ import { Router } from '@angular/router';
 import { Plugins } from '@capacitor/core';
 import { AlertController,Platform } from '@ionic/angular';
 const { Storage } = Plugins;
+import { Facebook} from '@ionic-native/facebook/ngx';
 
 @Component({
   selector: 'app-cuenta',
@@ -14,9 +15,10 @@ export class cuentaPage{
 
    public nombreusuario;
    public subscription;
-
+   public usuario;
   constructor(public router:Router,
                private platform: Platform,
+               private facebook: Facebook,
               private alertController:AlertController){}
 
  
@@ -38,6 +40,7 @@ export class cuentaPage{
     const ret = await Storage.get({ key: 'idusuario' });
     const user = JSON.parse(ret.value);
     console.log(user);
+    this.usuario = user;
     this.nombreusuario = user.nombres;
  
   }
@@ -49,8 +52,40 @@ export class cuentaPage{
   irMiPuntaje(){
       this.router.navigate(['miPuntaje']);
   }
+
   cerrarSesion(){
-    this.presentAlertConfirm();
+    if(this.usuario.idfacebook == " " || this.usuario.idfacebook==""){
+     Storage.remove({key:"idusuario"})
+      .then(res =>{
+        this.guardarSesion(2);
+        this.router.navigate(['login']);
+      })
+      .catch(er =>{
+        console.log("error");
+      });
+      
+    }else{
+      this.facebook.logout().then(res =>{
+        Storage.remove({key:"idusuario"})
+          .then(res =>{
+            this.guardarSesion(2);
+            this.router.navigate(['login']);
+          })
+          .catch(er =>{
+            console.log("error");
+          });
+      })
+      .catch(er =>{
+        console.log("error al cerrar sesion facebook");
+      });
+    }
+  }
+
+  async guardarSesion(sesion){
+    console.log(sesion);
+    await Storage.set({key:'sesion',value: JSON.stringify({
+      indicador: sesion,
+    })});
   }
 
   async presentAlertConfirm() {
@@ -70,7 +105,7 @@ export class cuentaPage{
           text: 'Si',
           handler: () => {
             console.log("Cerrar Sesion");
-         
+            this.cerrarSesion();
             
           }
         }

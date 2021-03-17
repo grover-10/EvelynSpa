@@ -3,6 +3,8 @@ import { ServiceService } from '../api/service.service';
 import { AlertController, Platform ,NavController} from '@ionic/angular';
 import * as moment from 'moment';
 import { Router } from '@angular/router';
+import { Plugins } from '@capacitor/core';
+const { Storage } = Plugins;
 
 @Component({
   selector: 'app-misCitas',
@@ -18,16 +20,24 @@ export class misCitasPage {
   listaVisible:any;
   opcionSeleccionada = "1";
   public subscription;
+  public idusuario;
   constructor(private service:ServiceService,
     private router:Router,
     private platform: Platform) {}
 
   ionViewWillEnter(): void{
-   this.getProximasCitas(1);
+   this.getDatos();
    this.subscription = this.platform.backButton.subscribeWithPriority(9999, () => {
     this.router.navigate(['tabs/inicio']);
    
   });
+  }
+
+  async getDatos(){
+    const ret = await Storage.get({ key: 'idusuario' });
+    const user = JSON.parse(ret.value);
+    this.idusuario = user.idusuario;
+    this.cambiarListaCitas();
   }
 
   // Restore to default when leaving this page
@@ -35,15 +45,14 @@ export class misCitasPage {
     this.subscription.unsubscribe();
   } 
 
-  cambiarListaCitas(event){
-
-    if(event.detail.value == "1"){
+  cambiarListaCitas(){
+    if(this.opcionSeleccionada == "1"){
       this.listaVisible  = [];
-      this.getProximasCitas(1);
+      this.getProximasCitas(this.idusuario);
     }else{
-      if(event.detail.value == "2"){
+      if(this.opcionSeleccionada == "2"){
         this.listaVisible  = [];
-        this.getHistorialCitas(1);
+        this.getHistorialCitas(this.idusuario);
       }
     }
   }

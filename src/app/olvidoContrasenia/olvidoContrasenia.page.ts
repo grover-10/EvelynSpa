@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import {ModalController} from '@ionic/angular';
+import {ModalController, NavController, Platform} from '@ionic/angular';
 import { Router,ActivatedRoute,NavigationExtras } from '@angular/router';
 import {modalErrorLoginPage} from '../modals/modalErrorLogin/modalErrorLogin.page'
 import { ServiceService } from '../api/service.service';
@@ -19,18 +19,32 @@ export interface Slide {
 export class olvidoContraseniaPage {
   correo;
   public isLoading = false;
+  public subscription;
   constructor(
     public router:Router,
     public alertController: AlertController,
     private apiServicio:ServiceService,
+    private platform: Platform,
+    private navCtrl: NavController,
     public loadingController: LoadingController,
     ){}
 
+  ionViewWillEnter(): void{
+      this.subscription = this.platform.backButton.subscribeWithPriority(9999, () => {
+       this.navCtrl.pop();
+     });
+  }
+
+  // Restore to default when leaving this page
+  ionViewDidLeave(): void {
+    this.subscription.unsubscribe();
+  } 
   irIngresarCodigo(){
     this.loadingRegistrando();
     let codigo = this.generaCodigo();
-    this.apiServicio.validarCorreo(this.correo)
-      .subscribe((data)=>{
+    let usuario:any = {correo:this.correo}
+    this.apiServicio.validarCorreo(usuario)
+      .then((data)=>{
         console.log(data);
         if(Number(data) == 1){
           
@@ -56,11 +70,13 @@ export class olvidoContraseniaPage {
           this.dismiss();
           this.AlertError('El correo ingresado no esta asociado a ninguna cuenta');
         }
-      },(er)=>{
+      }).catch(error=>{
         this.dismiss();
-        console.log(er);
+        console.log(error);
         this.AlertError('Hubo un error con la red intentalo nuevamente');
       });
+
+ 
 
        
   }

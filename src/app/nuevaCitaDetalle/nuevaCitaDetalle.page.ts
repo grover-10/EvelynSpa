@@ -104,7 +104,12 @@ export class nuevaCitaDetallePage{
     const modal= await this.modalController.create({
        component: modalCitaReservadaPage,
      });
-     await modal.present();
+     modal.onDidDismiss()
+     .then((data) => {
+         const subcategoria = data['data'];
+         this.router.navigate(['tabs/misCitas']);
+      });
+      return await modal.present();
  
    }
 

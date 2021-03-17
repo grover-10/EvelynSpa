@@ -15,46 +15,76 @@ ion-content {
         line-height: 21px;
         font-weight: bold;
     }
-    .input-email{
-        margin-top: 10px;
-        margin-bottom: 10px;
-        margin-left: auto;
-        margin-right: auto;
-        width: 86%;
-        height: 100%;
-       --background: transparent !important;
-       border: 1.6px solid #c5c3c3;
-       border-radius: 8px !important;
-     
-       --highlight-color-focused: none;
+    .list-puntaje{
 
-
-       .input-text{
-           color: #8F9090;
-           font-family: 'Roboto';
-           font-style: Regular;
-           font-weight: 400;
-       }
+        background-color: #ffffff !important;
+        .item-puntaje{
+            margin-top: 10px;
+            margin-bottom: 10px;
+            margin-left: auto;
+            margin-right: auto;
+            width: 90%;
+           --background: transparent !important;
+           border: 0.5px solid #d4d4d4;
+           box-sizing: border-box;
+           box-shadow: 0px 2px 5px rgba(0, 0, 0, 0.0385981);
+           border-radius: 15px !important;
+         
+           --highlight-color-focused: none;
+    
+           .derecha{
+            margin: auto;
+            margin-top: 5px;
+            color: #708070;
+            font-family: 'Roboto';
+            font-style: normal;
+            font-weight: 900;
+            font-size: 24px;
+            line-height: 28px;
+            
+        }
+        .titulo{
+            margin-top: 5px;
+            font-family: 'Roboto';
+            font-style: normal;
+            font-weight: 500;
+            font-size: 18px;
+            line-height: 21px;
+            color: #515252;
+        }
+        .fecha{
+            margin-top: 5px;
+            font-family: 'Roboto';
+            font-style: normal;
+            font-weight: 500;
+            font-size: 16px;
+            line-height: 19px;    
+            color: #8F9090;
+        }
+        
+   
+        }
     }
+
 
     
     .puntaje-titulo{
         color: #515252;
         margin-left: 7%;
         font-family: 'Roboto';
-        font-style: Regular;
-        font-weight: 400;
+        font-style: normal;
+        font-weight: 500;
         font-size: 16px;
         line-height: 19px;
         margin-top: 10px;
        
     }
     .puntaje-total{
-        color: #8F9090;
+        color: #515252;
         margin-left: 3px;
         font-family: 'Roboto';
-        font-style: Regular;
-        font-weight: 400;
+        font-style: normal;
+        font-weight: 500;
         font-size: 16px;
         line-height: 19px;
         margin-top: 10px;
@@ -64,41 +94,19 @@ ion-content {
 
 }
 
-.derecha{
-    margin: auto;
-    margin-top: 10px;
-    color: #708070;
-    font-family: Roboto;
-    font-style: normal;
-    font-weight: 900;
-    font-size: 24px;
-    line-height: 28px;
-    
-}
-.titulo{
-    margin-top: 10px;
-    font-family: Roboto;
-    font-style: normal;
-    font-weight: 500;
-    font-size: 18px;
-    line-height: 21px;
-    color: #515252;
-}
-.fecha{
-    margin-top: 10px;
-    font-family: Roboto;
-    font-style: normal;
-    font-weight: 500;
-    font-size: 16px;
-    line-height: 19px;    
-    color: #8F9090;
-}
 
 ion-header{
 
     ion-toolbar{
         --background: #FFFFFF !important;
-        
+        .title-page{
+            font-family: 'Roboto';
+            font-style: normal;
+            font-weight: 600;
+            font-size: 18px;
+            line-height: 21px;
+            color: #515252;
+        }
     }
 }
 

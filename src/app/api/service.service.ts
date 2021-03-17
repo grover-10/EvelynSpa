@@ -110,12 +110,19 @@ export class ServiceService {
 
   //BUSCAR TRATAMIENTOS 
   buscarTratamiento(val){
-    return this.http.get(this.url+"/tratamiento/buscar/"+val,this.options);
+    return this.http.get(this.url+"/tratamiento/buscar/"+val,this.options); 
   }
 
   //VALIDAR CORREO PARA RECUPERAR CONTRASEÑA
-  validarCorreo(correo){
-    return this.http.get(this.url+"/usuario/validar/correo/"+correo,this.options);
+  validarCorreo(data){
+    return new Promise((resolve, reject) =>{
+      this.http.post(this.url+"/usuario/validar/correo/",data,this.options)
+        .subscribe(Response =>{
+          resolve(Response); 
+        }, (error) =>{
+          reject(error);
+        });
+    });
   }
 
   // ENVIAR CORREO
@@ -141,4 +148,28 @@ export class ServiceService {
         });
     });
   }
+
+
+  //LISTAR HISTORIAL CITAS
+  getListarPuntos(data){
+    return this.http.get(this.url+"/puntos/"+data,this.options);
+  }
+  
+  //LISTAR DISPONIBILIDAD CANTIDAD
+  getDisponibilidadCantidad(){
+      return this.http.get(this.url+"/cita/atencion/cantidad",this.options);
+  }
+  
+  //ACTUALIZAR USUARIO
+  actualizarUsuario(user){
+    return new Promise((resolve, reject) =>{
+      this.http.put(this.url+"/usuario/actualizar",user,this.options)
+      .subscribe((res) =>{
+        resolve(res);
+      },(error) =>{
+        reject(error);
+      });
+    });
+  }
+
 }

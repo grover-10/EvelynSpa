@@ -7,6 +7,8 @@ import { AlertController, ModalController,Platform,NavController} from '@ionic/a
 import { Router, ActivatedRoute,NavigationExtras } from '@angular/router';
 import { ServiceService } from '../api/service.service';
 import * as moment from 'moment';
+import { Plugins } from '@capacitor/core';
+const { Storage } = Plugins;
 
 @Component({
   selector: 'app-nuevaCitaHorario',
@@ -18,7 +20,7 @@ export class nuevaCitaHorarioPage{
 
   eventSource = [];
   viewTitle: string;
-
+  public idusuario;
   public horascita:any;
   public fecha;                        
   public horario;
@@ -27,6 +29,7 @@ export class nuevaCitaHorarioPage{
   public botonContinuar = true;
   public dateNow;
   public timeNow;  
+  public cantidadAtencion:any;
   @ViewChild(CalendarComponent) myCal: CalendarComponent;
   public subscription;
   calendar = {
@@ -109,6 +112,7 @@ export class nuevaCitaHorarioPage{
     }else{
       console.log(time);
       this.fecha = String(time);
+      this.getDisponibilidadCantidad();
       this.getHorarios();
     }
         
@@ -130,10 +134,19 @@ getTimeNow(){
 excluirHorasPasadas(){
   for(let hora of this.horascita){
           hora.estaDisponible = this.compareTime(this.timeNow,hora.hora);
-
   }
+  this.getDatos();
+}
+
+async getDatos(){
+  const ret = await Storage.get({ key: 'idusuario' });
+  const user = JSON.parse(ret.value);
+  this.idusuario = user.idusuario;
+  console.log('DATOS');
+  console.log(user);
   this.getCitasDiaUsuario();
 }
+
 compareTime(time1,time2):Boolean{
 
 	var jdt1=Date.parse(this.dateNow+' '+time1);
@@ -158,7 +171,7 @@ getDisponibilidadCita(fecha){
           for(let hora of this.horascita){
               for(let horaD of horasDisponibles){
                   if(hora.idhorario === horaD.idhorario){
-                      if(horaD.disponibilidad > 2){
+                      if(horaD.disponibilidad > (this.cantidadAtencion.disponibilidad_atencion-1)){
                           hora.estaDisponible = false;
                       }
                   }
@@ -173,7 +186,7 @@ getDisponibilidadCita(fecha){
 }
 
 getCitasDiaUsuario(){
-  let cita = {fecha:this.fecha,usuario:{idusuario:1}};
+  let cita = {fecha:this.fecha,usuario:{idusuario:this.idusuario}};
   this.service.postCitasDia(cita)
   .then(data=>{
     ///// NO SE PERMITE QUE REGISTRE UNA CITA EN LA MISMA HORA Y MISMO DIA
@@ -206,6 +219,15 @@ getHorarios(){
     this.getDisponibilidadCita(this.fecha);
     
   },(error)=>{
+    console.log(error);
+  });
+}
+
+getDisponibilidadCantidad(){
+  this.service.getDisponibilidadCantidad()
+  .subscribe(data=>{
+        this.cantidadAtencion = data;
+  },(error) =>{
     console.log(error);
   });
 }

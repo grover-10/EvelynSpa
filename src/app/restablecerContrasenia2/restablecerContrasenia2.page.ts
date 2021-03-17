@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import {ModalController} from '@ionic/angular';
+import {ModalController, Platform} from '@ionic/angular';
 import {Router} from '@angular/router';
 import {modalErrorLoginPage} from '../modals/modalErrorLogin/modalErrorLogin.page'
 export interface Slide {
@@ -16,10 +16,24 @@ export interface Slide {
 
 export class restablecerContrasenia2Page {
 
-  constructor(private router:Router){
+  public subscription;
+
+  constructor(private router:Router,
+    private platform: Platform,){
 
   }
 
+  ionViewWillEnter(): void{
+  
+    this.subscription = this.platform.backButton.subscribeWithPriority(9999, () => {
+     this.router.navigate(['login']);
+   });
+}
+
+// Restore to default when leaving this page
+ionViewDidLeave(): void {
+  this.subscription.unsubscribe();
+} 
 
   irLogin(){
     this.router.navigate(['login']);

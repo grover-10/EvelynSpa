@@ -22,7 +22,7 @@ export class nuevaCitaDatosPage implements OnInit{
   public autocomplete: { input: string; };
   public autocompleteItems: any[];
   public geocoder:any;
-  public ubicacion:any = {};
+  public ubicacion:any = {direccion:'Mz:c Lt:10, Trujillo (EvelynSpa)', lat:-8.114204,lng:-79.045193};
   public paciente:any = {idPaciente:0}
   private idUsuario;
   public subscription;
@@ -56,7 +56,7 @@ ngOnInit(){
     apellidos: ['', [Validators.required]],
     celular: ['', [Validators.required, Validators.pattern('^[0-9]+$'),Validators.minLength(9)]],
     email: ['', [Validators.required, Validators.pattern('[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,3}$')]],
-    direccion: ['', [Validators.required]]
+   // direccion: ['', [Validators.required]]
     
   });
  

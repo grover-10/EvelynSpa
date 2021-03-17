@@ -3,7 +3,7 @@
       <ion-buttons slot="start">
         <ion-back-button style="content: url('../assets/icon/Arrow - Left 2.svg'); zoom: 0.8;"></ion-back-button>
       </ion-buttons>
-      <ion-title>
+      <ion-title class="title-page">
         Mi puntaje
     </ion-title>
     </ion-toolbar>
@@ -13,31 +13,29 @@
 <ion-content no-bounce [fullscreen]="true">
  
   <ion-row >
-    <ion-label class="puntaje-titulo">Puntaje total: </ion-label><ion-label class="puntaje-total">13 puntos</ion-label>
+    <ion-label class="puntaje-titulo"><b>Puntaje total:</b> </ion-label><ion-label class="puntaje-total">{{puntajeTotal}} puntos</ion-label>
     </ion-row>
-    <ion-row>
-    <div style="width: 100%; text-align: center; align-content: center;">
-        <ion-item class="input-email" lines="none">
+      <ion-list class="list-puntaje">
+        <ion-item class="item-puntaje" lines="none" *ngFor="let item of listaPuntos">
           <ion-col slot="start">
             <ion-row>
-              <ion-label class="titulo">Vinoterapia</ion-label>
+              <ion-label class="titulo">{{item.nombre}}</ion-label>
             </ion-row>  
             <ion-row>
-              <ion-label class="fecha">13-01-2020</ion-label>
+              <ion-label class="fecha">{{item.fecha}}</ion-label>
             </ion-row>  
           </ion-col>
           <ion-col slot="end">
             <ion-row>
-              <ion-label class="derecha" >13</ion-label>
+              <ion-label class="derecha" >{{item.puntos}}</ion-label>
             </ion-row>  
             <ion-row>
               <ion-label class="derecha">PTS</ion-label>
             </ion-row>  
           </ion-col>
-          
         </ion-item>
-    </div>
-  </ion-row>
+      </ion-list>
+
 
 </ion-content>
 
